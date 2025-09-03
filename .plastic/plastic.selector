@@ -1,0 +1,4 @@
+repository "Proyecto_Pac-Man/Proyecto_Pac-Man@4673237052665@cloud"
+  path "/"
+    br "/main"
+    co "/main"
