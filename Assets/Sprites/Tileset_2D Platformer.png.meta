@@ -1,0 +1,1368 @@
+fileFormatVersion: 2
+guid: 10f7feec971e0404abae1da9b6360521
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -4152199501073206069
+    second: Tileset_2D Platformer_0
+  - first:
+      213: -439531717209876004
+    second: Tileset_2D Platformer_1
+  - first:
+      213: 8423067454605293693
+    second: Tileset_2D Platformer_2
+  - first:
+      213: 4639157985306531360
+    second: Tileset_2D Platformer_3
+  - first:
+      213: 3344024761315963017
+    second: Tileset_2D Platformer_4
+  - first:
+      213: -4261764505900774321
+    second: Tileset_2D Platformer_5
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Tileset_2D Platformer_11
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 192
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7847fc30a36913343946d65b13e1975f
+      internalID: -1869844265
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tileset_2D Platformer_12
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 192
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 66be52a19548ce64e8ef0737a23da56d
+      internalID: 383839723
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tileset_2D Platformer_13
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 192
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c267d371541bf847ba15fea789e8ae6
+      internalID: -1787836480
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tileset_2D Platformer_14
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 192
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f57f1c840d2147c489691333e3a6cbe4
+      internalID: 1863061261
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tileset_2D Platformer_15
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 192
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 29fc3415ffbb621479fbcae21bd5b550
+      internalID: 1911284863
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tileset_2D Platformer_16
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 192
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ed32140094f247c4b86f1c03b2ddea09
+      internalID: -925356541
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tileset_2D Platformer_17
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 192
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7c4cc537cc07a8478d52542a5b5bfc4
+      internalID: 304646173
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tileset_2D Platformer_18
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 192
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d8fc54634ad9df444b617c40968c9f43
+      internalID: -990018288
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tileset_2D Platformer_19
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 192
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c5d81b3d692ff84697f3c3ba134e07a
+      internalID: 1655659299
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tileset_2D Platformer_20
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 192
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0286e0d9e4165ac4f9c42d8a32e6214d
+      internalID: 781163350
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tileset_2D Platformer_21
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 192
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 52345e4893508e141856d7cf3ee207d7
+      internalID: -1056329530
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tileset_2D Platformer_22
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 192
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c12029b30092b7e4fa5909f218f46d41
+      internalID: -1129329994
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tileset_2D Platformer_24
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 176
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9e0fe686e5fb65d4b9c3351a78fcafbe
+      internalID: 490046211
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tileset_2D Platformer_25
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 176
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e5ea27f2c16ac924987dcf254377d775
+      internalID: -1235095701
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tileset_2D Platformer_26
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 176
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a8c9ddb32add8bd49ae441bd11d41983
+      internalID: 644257892
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tileset_2D Platformer_27
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 176
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6c7e031730aae204986a8650392fadc2
+      internalID: 427637939
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tileset_2D Platformer_28
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 176
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5cd9894a755c8ea46a3b6c60dc31487f
+      internalID: -1105829675
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tileset_2D Platformer_29
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 176
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 30380c7b88dec6a449f99864ebc942c7
+      internalID: -279449291
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tileset_2D Platformer_30
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 176
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: db1666d49359492498dafc0d69e49c85
+      internalID: 779985411
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tileset_2D Platformer_31
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 176
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7f50d0cb74868b044bbfc91bb18c8c61
+      internalID: -1506498733
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tileset_2D Platformer_32
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 176
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d190ce11d857e6e49b8737fa7613ac20
+      internalID: -1204460962
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tileset_2D Platformer_33
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 176
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 868dec71d317116489aa5b91c5621d3c
+      internalID: 860025353
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tileset_2D Platformer_34
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 176
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d9e1d718cc7d694d8e6059fc82f5429
+      internalID: -1298646760
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tileset_2D Platformer_35
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 176
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf009464f8869044698706f5b2e977fa
+      internalID: -1389161211
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tileset_2D Platformer_36
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 160
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 751823435e3bf434bb2eb9db7d36db0b
+      internalID: 247373054
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tileset_2D Platformer_37
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 160
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6c4ee3e619768d144b5e685b4d9a60f9
+      internalID: 171621039
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tileset_2D Platformer_38
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 160
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b7eee7e30e6273144b4e4297477db598
+      internalID: 1248533583
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tileset_2D Platformer_39
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 160
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e972947b146aa040a6990e13349d4b7
+      internalID: 546924143
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tileset_2D Platformer_40
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 160
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 52060da5dcf7d2b4380b30380195e90c
+      internalID: -1751576413
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tileset_2D Platformer_41
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 160
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c08b7d126087e04ba982e12287b128f
+      internalID: -1905708734
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tileset_2D Platformer_42
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 160
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc47c5dfa25a06941a262c1628fc1d2c
+      internalID: -1493341231
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tileset_2D Platformer_43
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 160
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b5636ff80a5d5e34aa08571fd072b633
+      internalID: -556145592
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tileset_2D Platformer_44
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 160
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 79a67cb943fa05c4dbf890f9a12258f7
+      internalID: 2097563596
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tileset_2D Platformer_45
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 160
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8c3d42855abe2224e9168aed2ac3a615
+      internalID: -1231800599
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tileset_2D Platformer_46
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 160
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9fba4544da5d1d646a12a05e69659bda
+      internalID: -1146075808
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tileset_2D Platformer_47
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 160
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 25a8bf16c6a393b449a7bb25ebb346c9
+      internalID: -94388500
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tileset_2D Platformer_48
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 144
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba6642d8cff37de499b37a29be0a6b30
+      internalID: 155332925
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tileset_2D Platformer_49
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 144
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e16902776a641e40b5da1bcb43747b4
+      internalID: -1298195347
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tileset_2D Platformer_50
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 144
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b18401226df16349b2dd5961a253e1f
+      internalID: 768915504
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tileset_2D Platformer_51
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 144
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba4eb3aba16daa04cb8ca0684d19fd10
+      internalID: 1971797629
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tileset_2D Platformer_52
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 144
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b64b04afcec9b0499a9b328e0af2b83
+      internalID: -1146580355
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tileset_2D Platformer_53
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 144
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dcebf3d85329bbd4db58060448b87bc4
+      internalID: 776601689
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tileset_2D Platformer_54
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 144
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e45c3a29cdd72b845950a6acd6d504da
+      internalID: -498526554
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tileset_2D Platformer_55
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 144
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 703fd943d7e0b9e4d93440d76d27800a
+      internalID: -1953709823
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tileset_2D Platformer_56
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 144
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9455d00c5146809449b3ff9116b3c998
+      internalID: -912056379
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tileset_2D Platformer_57
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 144
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 72f33a7e4622f534687f8f7d2747721c
+      internalID: 1900644707
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tileset_2D Platformer_58
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 144
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 250cea099cc7b004cb72a69eaccff3b5
+      internalID: 1589640501
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tileset_2D Platformer_59
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 144
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5523bd90f27ddc841ab7f4f887dc5ca7
+      internalID: 1193411427
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 77aa1e9e4feccbd4a8c45e26f250d64d
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":16.0,"y":16.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      Tileset_2D Platformer_0: -4152199501073206069
+      Tileset_2D Platformer_1: -439531717209876004
+      Tileset_2D Platformer_10: -1645670689
+      Tileset_2D Platformer_100: 1866225742
+      Tileset_2D Platformer_101: -80502904
+      Tileset_2D Platformer_102: -10440566
+      Tileset_2D Platformer_103: -1615893142
+      Tileset_2D Platformer_104: 2203565
+      Tileset_2D Platformer_105: -1731244933
+      Tileset_2D Platformer_106: -1485927891
+      Tileset_2D Platformer_107: -288634911
+      Tileset_2D Platformer_108: -1780711661
+      Tileset_2D Platformer_109: -1166075081
+      Tileset_2D Platformer_11: -1869844265
+      Tileset_2D Platformer_110: -1510053549
+      Tileset_2D Platformer_111: 1479573758
+      Tileset_2D Platformer_112: -210658140
+      Tileset_2D Platformer_113: 1744294330
+      Tileset_2D Platformer_114: -799680197
+      Tileset_2D Platformer_115: 1198685101
+      Tileset_2D Platformer_116: 115608361
+      Tileset_2D Platformer_117: -915231579
+      Tileset_2D Platformer_118: 6372355
+      Tileset_2D Platformer_119: -1627630926
+      Tileset_2D Platformer_12: 383839723
+      Tileset_2D Platformer_120: 336773499
+      Tileset_2D Platformer_121: -794137020
+      Tileset_2D Platformer_122: -1877433744
+      Tileset_2D Platformer_123: -552214978
+      Tileset_2D Platformer_124: 1993808651
+      Tileset_2D Platformer_125: 2054696313
+      Tileset_2D Platformer_126: 677370882
+      Tileset_2D Platformer_127: 1729897296
+      Tileset_2D Platformer_128: -129722721
+      Tileset_2D Platformer_129: -1265188620
+      Tileset_2D Platformer_13: -1787836480
+      Tileset_2D Platformer_130: 719179685
+      Tileset_2D Platformer_131: 1381411562
+      Tileset_2D Platformer_132: 1034472535
+      Tileset_2D Platformer_133: 208145118
+      Tileset_2D Platformer_134: -647406076
+      Tileset_2D Platformer_135: -1997548447
+      Tileset_2D Platformer_136: -411924226
+      Tileset_2D Platformer_137: 228751878
+      Tileset_2D Platformer_138: -1439669767
+      Tileset_2D Platformer_139: 327588465
+      Tileset_2D Platformer_14: 1863061261
+      Tileset_2D Platformer_140: -393803286
+      Tileset_2D Platformer_141: 1374886107
+      Tileset_2D Platformer_142: -91272911
+      Tileset_2D Platformer_143: -1771986916
+      Tileset_2D Platformer_144: -1080678605
+      Tileset_2D Platformer_145: 720304075
+      Tileset_2D Platformer_146: -1046512530
+      Tileset_2D Platformer_147: 1361559193
+      Tileset_2D Platformer_148: -1982063626
+      Tileset_2D Platformer_149: -229207322
+      Tileset_2D Platformer_15: 1911284863
+      Tileset_2D Platformer_150: 100919224
+      Tileset_2D Platformer_151: -2009939468
+      Tileset_2D Platformer_152: 2612447
+      Tileset_2D Platformer_153: 1889748090
+      Tileset_2D Platformer_154: 1506497997
+      Tileset_2D Platformer_155: 307824107
+      Tileset_2D Platformer_156: -859162087
+      Tileset_2D Platformer_157: 263916940
+      Tileset_2D Platformer_158: 840597193
+      Tileset_2D Platformer_159: 1839438651
+      Tileset_2D Platformer_16: -925356541
+      Tileset_2D Platformer_160: 1302331932
+      Tileset_2D Platformer_161: -1218085242
+      Tileset_2D Platformer_162: -515944433
+      Tileset_2D Platformer_163: -679188827
+      Tileset_2D Platformer_164: -1169028533
+      Tileset_2D Platformer_165: 1861979667
+      Tileset_2D Platformer_166: -1480642277
+      Tileset_2D Platformer_167: -815787810
+      Tileset_2D Platformer_168: 1405589107
+      Tileset_2D Platformer_169: 859557837
+      Tileset_2D Platformer_17: 304646173
+      Tileset_2D Platformer_170: -1452593417
+      Tileset_2D Platformer_171: -350243436
+      Tileset_2D Platformer_172: 1490792899
+      Tileset_2D Platformer_173: -1355771966
+      Tileset_2D Platformer_174: -1831261821
+      Tileset_2D Platformer_18: -990018288
+      Tileset_2D Platformer_19: 1655659299
+      Tileset_2D Platformer_2: 8423067454605293693
+      Tileset_2D Platformer_20: 781163350
+      Tileset_2D Platformer_21: -1056329530
+      Tileset_2D Platformer_22: -1129329994
+      Tileset_2D Platformer_23: 2066821881
+      Tileset_2D Platformer_24: 490046211
+      Tileset_2D Platformer_25: -1235095701
+      Tileset_2D Platformer_26: 644257892
+      Tileset_2D Platformer_27: 427637939
+      Tileset_2D Platformer_28: -1105829675
+      Tileset_2D Platformer_29: -279449291
+      Tileset_2D Platformer_3: 4639157985306531360
+      Tileset_2D Platformer_30: 779985411
+      Tileset_2D Platformer_31: -1506498733
+      Tileset_2D Platformer_32: -1204460962
+      Tileset_2D Platformer_33: 860025353
+      Tileset_2D Platformer_34: -1298646760
+      Tileset_2D Platformer_35: -1389161211
+      Tileset_2D Platformer_36: 247373054
+      Tileset_2D Platformer_37: 171621039
+      Tileset_2D Platformer_38: 1248533583
+      Tileset_2D Platformer_39: 546924143
+      Tileset_2D Platformer_4: 3344024761315963017
+      Tileset_2D Platformer_40: -1751576413
+      Tileset_2D Platformer_41: -1905708734
+      Tileset_2D Platformer_42: -1493341231
+      Tileset_2D Platformer_43: -556145592
+      Tileset_2D Platformer_44: 2097563596
+      Tileset_2D Platformer_45: -1231800599
+      Tileset_2D Platformer_46: -1146075808
+      Tileset_2D Platformer_47: -94388500
+      Tileset_2D Platformer_48: 155332925
+      Tileset_2D Platformer_49: -1298195347
+      Tileset_2D Platformer_5: -4261764505900774321
+      Tileset_2D Platformer_50: 768915504
+      Tileset_2D Platformer_51: 1971797629
+      Tileset_2D Platformer_52: -1146580355
+      Tileset_2D Platformer_53: 776601689
+      Tileset_2D Platformer_54: -498526554
+      Tileset_2D Platformer_55: -1953709823
+      Tileset_2D Platformer_56: -912056379
+      Tileset_2D Platformer_57: 1900644707
+      Tileset_2D Platformer_58: 1589640501
+      Tileset_2D Platformer_59: 1193411427
+      Tileset_2D Platformer_6: -1097330938
+      Tileset_2D Platformer_60: -258757067
+      Tileset_2D Platformer_61: -105718323
+      Tileset_2D Platformer_62: 964309431
+      Tileset_2D Platformer_63: -988994372
+      Tileset_2D Platformer_64: -292166593
+      Tileset_2D Platformer_65: -1829211176
+      Tileset_2D Platformer_66: 728376639
+      Tileset_2D Platformer_67: 829375623
+      Tileset_2D Platformer_68: 78244746
+      Tileset_2D Platformer_69: 1668668770
+      Tileset_2D Platformer_7: 1568562910
+      Tileset_2D Platformer_70: -1975769259
+      Tileset_2D Platformer_71: 1992486307
+      Tileset_2D Platformer_72: -798936907
+      Tileset_2D Platformer_73: -439765307
+      Tileset_2D Platformer_74: 254857607
+      Tileset_2D Platformer_75: -782404020
+      Tileset_2D Platformer_76: 2060799791
+      Tileset_2D Platformer_77: 1566687870
+      Tileset_2D Platformer_78: 1581171600
+      Tileset_2D Platformer_79: 1172796044
+      Tileset_2D Platformer_8: -1950594419
+      Tileset_2D Platformer_80: 353462795
+      Tileset_2D Platformer_81: 1430590180
+      Tileset_2D Platformer_82: 1327737803
+      Tileset_2D Platformer_83: 1143260774
+      Tileset_2D Platformer_84: 1357749649
+      Tileset_2D Platformer_85: 1761598487
+      Tileset_2D Platformer_86: 1374896008
+      Tileset_2D Platformer_87: -146936714
+      Tileset_2D Platformer_88: -375188828
+      Tileset_2D Platformer_89: -1620995549
+      Tileset_2D Platformer_9: 1575814626
+      Tileset_2D Platformer_90: -1085324509
+      Tileset_2D Platformer_91: 1683027859
+      Tileset_2D Platformer_92: 697022363
+      Tileset_2D Platformer_93: -1697342111
+      Tileset_2D Platformer_94: 110334945
+      Tileset_2D Platformer_95: -1839744585
+      Tileset_2D Platformer_96: -519816147
+      Tileset_2D Platformer_97: -75012990
+      Tileset_2D Platformer_98: -1790320793
+      Tileset_2D Platformer_99: -1833644309
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
