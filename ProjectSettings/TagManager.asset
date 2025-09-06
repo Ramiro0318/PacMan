@@ -44,5 +44,8 @@ TagManager:
   - name: Escenario
     uniqueID: 441807501
     locked: 0
+  - name: Elementos
+    uniqueID: 2366081787
+    locked: 0
   m_RenderingLayers:
   - Default
