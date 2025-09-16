@@ -3574,6 +3574,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8375368008688305439, guid: 123ae5779df8e3a47b7846ca2d94501e, type: 3}
   m_PrefabInstance: {fileID: 4907972332771862660}
   m_PrefabAsset: {fileID: 0}
+--- !u!1839735485 &1199386114 stripped
+Tilemap:
+  m_CorrespondingSourceObject: {fileID: 6960596360026775534, guid: 123ae5779df8e3a47b7846ca2d94501e, type: 3}
+  m_PrefabInstance: {fileID: 4907972332771862660}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1216277030
 GameObject:
   m_ObjectHideFlags: 0
@@ -4186,11 +4191,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dc0156150cd53a41b639657a4aee5a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SimplePacmanMove
-  moveSpeed: 1
-  collisionCheckDistance: 0.09
+  speed: 1
+  wallTilemap: {fileID: 1199386114}
   wallLayer:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 0
 --- !u!114 &1443779595
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4210,7 +4215,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1443779590}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
@@ -4284,7 +4289,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.1
+  m_Radius: 0.04
 --- !u!50 &1443779599
 Rigidbody2D:
   serializedVersion: 5
@@ -5073,25 +5078,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Pellet
   points: 10
---- !u!1839735485 &1726534230 stripped
-Tilemap:
-  m_CorrespondingSourceObject: {fileID: 3090816371643887709, guid: bae115eb5728fa24b9579d5a26532ac4, type: 3}
-  m_PrefabInstance: {fileID: 733372933618539531}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1726534231
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1726534220}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6237672d6dc26c408f2f1cc447aba2c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PelletGenerator
-  pelletTilemap: {fileID: 1726534230}
-  pelletSprite: {fileID: -4516436471707867707, guid: a3fa84a69fdb5944d8ae645846fe1130, type: 3}
 --- !u!1 &1744219142
 GameObject:
   m_ObjectHideFlags: 0
@@ -6326,14 +6312,6 @@ PrefabInstance:
       propertyPath: m_Radius
       value: 0.03
       objectReference: {fileID: 0}
-    - target: {fileID: 1863642170009869416, guid: bae115eb5728fa24b9579d5a26532ac4, type: 3}
-      propertyPath: m_Offset.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1863642170009869416, guid: bae115eb5728fa24b9579d5a26532ac4, type: 3}
-      propertyPath: m_Offset.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2828319739019050358, guid: bae115eb5728fa24b9579d5a26532ac4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -6401,9 +6379,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7733036841795498188, guid: bae115eb5728fa24b9579d5a26532ac4, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1726534226}
-    - targetCorrespondingSourceObject: {fileID: 7733036841795498188, guid: bae115eb5728fa24b9579d5a26532ac4, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1726534231}
   m_SourcePrefab: {fileID: 100100000, guid: bae115eb5728fa24b9579d5a26532ac4, type: 3}
 --- !u!1001 &4907972332771862660
 PrefabInstance:

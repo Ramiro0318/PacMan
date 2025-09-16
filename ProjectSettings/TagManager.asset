@@ -3,18 +3,23 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags: []
+  tags:
+  - Wall
+  - Pallets
+  - Collector
+  - Walls
+  - Pellets
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Collector
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
+  - Walls
+  - Player
+  - Pellets
+  - Wall
   - 
   - 
   - 
@@ -49,6 +54,18 @@ TagManager:
     locked: 0
   - name: UI
     uniqueID: 604291413
+    locked: 0
+  - name: Collector
+    uniqueID: 3524622443
+    locked: 0
+  - name: Walls
+    uniqueID: 2738206583
+    locked: 0
+  - name: Player
+    uniqueID: 1434645837
+    locked: 0
+  - name: Pellets
+    uniqueID: 2368284067
     locked: 0
   m_RenderingLayers:
   - Default

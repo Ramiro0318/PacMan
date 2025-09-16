@@ -1,13 +1,23 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Linq;
+using System.Text.RegularExpressions;
 
 public class SimplePacmanMove : MonoBehaviour
 {
     public float moveSpeed = 1f;
-    public float collisionCheckDistance = 0.1f;
-    public LayerMask wallLayer = default;
+    public float collisionCheckDistance = 0.09f;
+    public LayerMask wallLayer = LayerMask.GetMask("Wall");
 
+    private Animator _animator;
     private Vector2 movementInput = Vector2.zero;
+    private Vector2 lastDirection = Vector2.right; // Dirección inicial
+    private bool hasInputThisFrame = false;
+
+    private void Awake()
+    {
+        _animator = GetComponent<Animator>();
+    }
 
     void Update()
     {
@@ -15,23 +25,45 @@ public class SimplePacmanMove : MonoBehaviour
         TryMove();
     }
 
+    void LateUpdate()
+    {
+        _animator.SetInteger("DireccionX", (int)movementInput.x);
+        _animator.SetInteger("DireccionY", (int)movementInput.y);
+        _animator.SetBool("Muerto", false);
+    }
+
     void HandleInput()
     {
-        movementInput = Vector2.zero;
-
-        
+        hasInputThisFrame = false;
         Keyboard keyboard = Keyboard.current;
         if (keyboard == null) return;
 
-        if (keyboard.wKey.isPressed || keyboard.upArrowKey.isPressed)
-            movementInput.y = 1;
-        else if (keyboard.sKey.isPressed || keyboard.downArrowKey.isPressed)
-            movementInput.y = -1;
+        string upPattern = @"^(w|up)$";
+        string downPattern = @"^(s|down)$";
+        string rightPattern = @"^(d|right)$";
+        string leftPattern = @"^(a|left)$";
 
-        if (keyboard.dKey.isPressed || keyboard.rightArrowKey.isPressed)
-            movementInput.x = 1;
-        else if (keyboard.aKey.isPressed || keyboard.leftArrowKey.isPressed)
-            movementInput.x = -1;
+        var pressedKeysThisFrame = keyboard.allKeys
+            .Where(key => key != null && key.wasPressedThisFrame);
+
+        foreach (var key in pressedKeysThisFrame)
+        {
+            if (key == null || key.keyCode == null) continue;
+
+            string keyName = key.keyCode.ToString().ToLower();
+            hasInputThisFrame = true;
+
+            if (Regex.IsMatch(keyName, upPattern))
+                lastDirection = Vector2.up;
+            else if (Regex.IsMatch(keyName, downPattern))
+                lastDirection = Vector2.down;
+            else if (Regex.IsMatch(keyName, rightPattern))
+                lastDirection = Vector2.right;
+            else if (Regex.IsMatch(keyName, leftPattern))
+                lastDirection = Vector2.left;
+        }
+
+        movementInput = lastDirection;
 
         if (movementInput.magnitude > 1)
             movementInput.Normalize();
@@ -41,7 +73,6 @@ public class SimplePacmanMove : MonoBehaviour
     {
         if (movementInput.magnitude > 0.1f)
         {
-           
             Vector2 moveDirection = movementInput.normalized;
             float distance = moveSpeed * Time.deltaTime + collisionCheckDistance;
 
@@ -53,6 +84,18 @@ public class SimplePacmanMove : MonoBehaviour
             {
                 transform.Translate(new Vector3(movementInput.x, movementInput.y, 0) * moveSpeed * Time.deltaTime);
             }
+            else
+            {
+                movementInput = Vector2.zero;
+                lastDirection = Vector2.zero;
+            }
         }
+    }
+    //Esto es para pruebas se puede quitar :p
+    void OnGUI()
+    {
+        GUI.Label(new Rect(10, 10, 300, 20), $"Movimiento: {movementInput}");
+        GUI.Label(new Rect(10, 30, 300, 20), $"Última Dirección: {lastDirection}");
+        GUI.Label(new Rect(10, 50, 300, 20), $"Input este frame: {hasInputThisFrame}");
     }
 }
