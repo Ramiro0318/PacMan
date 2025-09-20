@@ -530,7 +530,7 @@ RectTransform:
   m_Father: {fileID: 2076800832}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -582,7 +582,7 @@ GameObject:
   m_Component:
   - component: {fileID: 182303583}
   m_Layer: 5
-  m_Name: GameObject
+  m_Name: Musica
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -772,7 +772,7 @@ GameObject:
   - component: {fileID: 323753565}
   - component: {fileID: 323753564}
   m_Layer: 5
-  m_Name: btnSonido
+  m_Name: btnMusica
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -891,7 +891,7 @@ GameObject:
   - component: {fileID: 324878417}
   - component: {fileID: 324878418}
   m_Layer: 5
-  m_Name: sldSonido
+  m_Name: sldMusica
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1304,7 +1304,7 @@ GameObject:
   - component: {fileID: 421607613}
   - component: {fileID: 421607612}
   m_Layer: 5
-  m_Name: btnMusica
+  m_Name: btnSonido
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2000,7 +2000,7 @@ GameObject:
   m_Component:
   - component: {fileID: 636840405}
   m_Layer: 5
-  m_Name: GameObject
+  m_Name: Sonido
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2084,9 +2084,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Salir
-
-'
+  m_text: Exit
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ae9f4fe5d73c44242bcff3345cbe4241, type: 2}
   m_sharedMaterial: {fileID: -2468935186316052729, guid: ae9f4fe5d73c44242bcff3345cbe4241, type: 2}
@@ -2864,7 +2862,7 @@ RectTransform:
   m_Father: {fileID: 560043543}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2924,7 +2922,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &917505552
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3415,7 +3413,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Continuar
+  m_text: Continue
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ae9f4fe5d73c44242bcff3345cbe4241, type: 2}
   m_sharedMaterial: {fileID: -2468935186316052729, guid: ae9f4fe5d73c44242bcff3345cbe4241, type: 2}
@@ -6548,7 +6546,7 @@ RectTransform:
   m_Father: {fileID: 898832692}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -7539,7 +7537,7 @@ RectTransform:
   m_Father: {fileID: 692930559}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -9204,7 +9202,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Reiniciar
+  m_text: Restart
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ae9f4fe5d73c44242bcff3345cbe4241, type: 2}
   m_sharedMaterial: {fileID: -2468935186316052729, guid: ae9f4fe5d73c44242bcff3345cbe4241, type: 2}
@@ -9294,7 +9292,7 @@ GameObject:
   - component: {fileID: 1758001638}
   - component: {fileID: 1758001639}
   m_Layer: 5
-  m_Name: sldMusica
+  m_Name: sldSonido
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
