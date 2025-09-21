@@ -3510,6 +3510,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ControlPausa
   CanvasPausa: {fileID: 917505551}
+  btnDefault: {fileID: 33303505}
 --- !u!1 &1116140140
 GameObject:
   m_ObjectHideFlags: 0
