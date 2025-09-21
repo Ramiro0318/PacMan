@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,12 +8,28 @@ public class SimplePacmanMove : MonoBehaviour
     public float collisionCheckDistance = 0.1f;
     public LayerMask wallLayer = default;
 
+    private Animator _animator;
+
     private Vector2 movementInput = Vector2.zero;
+
+
+    private void Awake()
+    {
+        _animator = GetComponent<Animator>();
+    }
 
     void Update()
     {
         HandleInput();
         TryMove();
+
+    }
+
+     void LateUpdate()
+    {
+        _animator.SetInteger("DireccionX", (int) movementInput.x);
+        _animator.SetInteger("DireccionY", (int) movementInput.y);
+        _animator.SetBool("Muerto", false);
     }
 
     void HandleInput()
