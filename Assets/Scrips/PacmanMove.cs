@@ -10,29 +10,38 @@ public class SimplePacmanMove : MonoBehaviour
     public float collisionCheckDistance = 0.09f;
     public LayerMask wallLayer = LayerMask.GetMask("Wall");
 
+    // Variables para la muerte
+    public GameObject gameOverPanel; // Opcional: panel de game over
+    public bool isDead = false;
+    public float respawnTime = 3f; // Tiempo para respawn
+
     private Animator _animator;
-
     private Vector2 movementInput = Vector2.zero;
-    private Vector2 lastDirection = Vector2.right; // Dirección inicial
+    private Vector2 lastDirection = Vector2.right;
     private bool hasInputThisFrame = false;
-
+    private Vector3 initialPosition; // Posición inicial para respawn
 
     private void Awake()
     {
         _animator = GetComponent<Animator>();
+        initialPosition = transform.position; // Guardar posición inicial
     }
 
     void Update()
     {
+        // Si está muerto, no procesar movimiento
+        if (isDead) return;
+
         HandleInput();
         TryMove();
-
     }
 
-     void LateUpdate()
+    void LateUpdate()
     {
-        _animator.SetInteger("DireccionX", (int) movementInput.x);
-        _animator.SetInteger("DireccionY", (int) movementInput.y);
+        if (isDead) return;
+
+        _animator.SetInteger("DireccionX", (int)movementInput.x);
+        _animator.SetInteger("DireccionY", (int)movementInput.y);
         _animator.SetBool("Muerto", false);
     }
 
@@ -75,6 +84,8 @@ public class SimplePacmanMove : MonoBehaviour
 
     void TryMove()
     {
+        if (isDead) return;
+
         if (movementInput.magnitude > 0.1f)
         {
             Vector2 moveDirection = movementInput.normalized;
@@ -95,11 +106,52 @@ public class SimplePacmanMove : MonoBehaviour
             }
         }
     }
-    //Esto es para pruebas se puede quitar :p
+
+    public void Die()
+    {
+        if (isDead) return; // Evitar múltiples llamadas
+
+        isDead = true;
+
+        // Activar animación de muerte
+        _animator.SetBool("Muerto", true);
+
+        // Detener movimiento
+        movementInput = Vector2.zero;
+        lastDirection = Vector2.zero;
+
+        // Opcional: Mostrar game over
+        if (gameOverPanel != null)
+            gameOverPanel.SetActive(true);
+
+        Debug.Log("Pacman ha muerto!");
+
+      
+    }
+
+    void Respawn()
+    {
+        isDead = false;
+        transform.position = initialPosition;
+
+        // Reactivar movimiento
+        lastDirection = Vector2.right;
+        movementInput = Vector2.zero;
+
+        // Ocultar game over panel si existe
+        if (gameOverPanel != null)
+            gameOverPanel.SetActive(false);
+
+        _animator.SetBool("Muerto", false);
+
+        Debug.Log("Pacman ha resucitado!");
+    }
+
     void OnGUI()
     {
         GUI.Label(new Rect(10, 10, 300, 20), $"Movimiento: {movementInput}");
         GUI.Label(new Rect(10, 30, 300, 20), $"Última Dirección: {lastDirection}");
         GUI.Label(new Rect(10, 50, 300, 20), $"Input este frame: {hasInputThisFrame}");
+        GUI.Label(new Rect(10, 70, 300, 20), $"Estado: {(isDead ? "MUERTO" : "VIVO")}");
     }
 }
