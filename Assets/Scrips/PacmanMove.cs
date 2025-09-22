@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Linq;
@@ -10,9 +11,11 @@ public class SimplePacmanMove : MonoBehaviour
     public LayerMask wallLayer = LayerMask.GetMask("Wall");
 
     private Animator _animator;
+
     private Vector2 movementInput = Vector2.zero;
     private Vector2 lastDirection = Vector2.right; // Dirección inicial
     private bool hasInputThisFrame = false;
+
 
     private void Awake()
     {
@@ -23,12 +26,13 @@ public class SimplePacmanMove : MonoBehaviour
     {
         HandleInput();
         TryMove();
+
     }
 
-    void LateUpdate()
+     void LateUpdate()
     {
-        _animator.SetInteger("DireccionX", (int)movementInput.x);
-        _animator.SetInteger("DireccionY", (int)movementInput.y);
+        _animator.SetInteger("DireccionX", (int) movementInput.x);
+        _animator.SetInteger("DireccionY", (int) movementInput.y);
         _animator.SetBool("Muerto", false);
     }
 
