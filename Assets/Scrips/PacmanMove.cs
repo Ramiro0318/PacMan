@@ -10,27 +10,25 @@ public class SimplePacmanMove : MonoBehaviour
     public float collisionCheckDistance = 0.09f;
     public LayerMask wallLayer = LayerMask.GetMask("Wall");
 
-    // Variables para la muerte
-    public GameObject gameOverPanel; // Opcional: panel de game over
+    
+    public GameObject gameOverPanel; 
     public bool isDead = false;
-    public float respawnTime = 3f; // Tiempo para respawn
+    public float respawnTime = 3f; 
 
     private Animator _animator;
     private Vector2 movementInput = Vector2.zero;
     private Vector2 lastDirection = Vector2.right;
     private bool hasInputThisFrame = false;
-    private Vector3 initialPosition; // Posición inicial para respawn
+    private Vector3 initialPosition; 
 
     private void Awake()
     {
         _animator = GetComponent<Animator>();
-        initialPosition = transform.position; // Guardar posición inicial
+        initialPosition = transform.position; 
     }
 
     void Update()
     {
-        // Si está muerto, no procesar movimiento
-        if (isDead) return;
 
         HandleInput();
         TryMove();
@@ -109,18 +107,16 @@ public class SimplePacmanMove : MonoBehaviour
 
     public void Die()
     {
-        if (isDead) return; // Evitar múltiples llamadas
+        if (isDead) return;
 
         isDead = true;
 
-        // Activar animación de muerte
+        
         _animator.SetBool("Muerto", true);
 
-        // Detener movimiento
         movementInput = Vector2.zero;
         lastDirection = Vector2.zero;
 
-        // Opcional: Mostrar game over
         if (gameOverPanel != null)
             gameOverPanel.SetActive(true);
 
@@ -129,23 +125,22 @@ public class SimplePacmanMove : MonoBehaviour
       
     }
 
-    void Respawn()
-    {
-        isDead = false;
-        transform.position = initialPosition;
+    //void Respawn()
+    //{
+    //    isDead = false;
+    //    transform.position = initialPosition;
 
-        // Reactivar movimiento
-        lastDirection = Vector2.right;
-        movementInput = Vector2.zero;
+    //    
+    //    lastDirection = Vector2.right;
+    //    movementInput = Vector2.zero;
 
-        // Ocultar game over panel si existe
-        if (gameOverPanel != null)
-            gameOverPanel.SetActive(false);
+    //    if (gameOverPanel != null)
+    //        gameOverPanel.SetActive(false);
 
-        _animator.SetBool("Muerto", false);
+    //    _animator.SetBool("Muerto", false);
 
-        Debug.Log("Pacman ha resucitado!");
-    }
+    //    Debug.Log("Pacman ha resucitado!");
+    //}
 
     void OnGUI()
     {
