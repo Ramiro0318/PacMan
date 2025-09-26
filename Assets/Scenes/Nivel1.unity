@@ -648,7 +648,7 @@ Transform:
   m_GameObject: {fileID: 192329091}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.243, y: -1.035, z: 0}
+  m_LocalPosition: {x: 0.202, y: -0.091, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1847,7 +1847,10 @@ GameObject:
   - component: {fileID: 582112962}
   - component: {fileID: 582112964}
   - component: {fileID: 582112963}
-  m_Layer: 0
+  - component: {fileID: 582112967}
+  - component: {fileID: 582112966}
+  - component: {fileID: 582112965}
+  m_Layer: 10
   m_Name: Pinky
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1863,7 +1866,7 @@ Transform:
   m_GameObject: {fileID: 582112961}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.398, y: -1.037, z: 0}
+  m_LocalPosition: {x: 0.099, y: 0.394, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1949,6 +1952,90 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!58 &582112965
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 582112961}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 0.08
+--- !u!114 &582112966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 582112961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48c698b3c8d1cc14091c6d96f032e49b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GohstMove
+  moveSpeed: 0.9
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  playerTag: Player
+  pelletTag: Pellet
+  directionChangeInterval: 2
+  randomDirectionChance: 0.3
+  maxStuckChecks: 5
+--- !u!50 &582112967
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 582112961}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 0.0001
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!1 &584975706
 GameObject:
   m_ObjectHideFlags: 0
@@ -2056,7 +2143,7 @@ Transform:
   m_GameObject: {fileID: 584975706}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.087, y: -1.035, z: 0}
+  m_LocalPosition: {x: -0.009, y: -0.111, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3067,7 +3154,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!82 &983660799
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4314,7 +4401,10 @@ MonoBehaviour:
   collisionCheckDistance: 0.1
   wallLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
+  gameOverPanel: {fileID: 526622675}
+  isDead: 0
+  respawnTime: 3
 --- !u!58 &1443779595
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -5578,7 +5668,7 @@ Transform:
   m_GameObject: {fileID: 1762443660}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.077, y: -1.033, z: 0}
+  m_LocalPosition: {x: -0.219, y: -0.089, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6432,7 +6522,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2071837776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6604,7 +6694,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7733036841795498188, guid: bae115eb5728fa24b9579d5a26532ac4, type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: Pellets
       objectReference: {fileID: 0}
     - target: {fileID: 9066562444159084606, guid: bae115eb5728fa24b9579d5a26532ac4, type: 3}
       propertyPath: m_Constraints
