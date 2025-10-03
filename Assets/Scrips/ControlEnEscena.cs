@@ -6,7 +6,7 @@ public class ControlEnEscena: MonoBehaviour
 {
     public GameObject FromTrancision;
     public GameObject ToTrancision;
-
+    Vector3 movimiento = Vector3.zero;
 
     public void Transicion(GameObject btn) 
     {
