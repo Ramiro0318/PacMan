@@ -7,6 +7,11 @@ public class Pellet : MonoBehaviour
     //Esto es solo para probar proxximanete lo implementamos en la interfaz
     public int points = 10;
 
+    private void Start()
+    {
+        gameObject.tag = "Pallets";
+    }
+
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
