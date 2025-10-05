@@ -16,7 +16,6 @@ public class ControlEnEscena : MonoBehaviour
         ToTransicion = toTransicion;
         FromTransicion.SetActive(true);
         toTransicion.SetActive(true);
-        Debug.Log( toTransicion.name);
 
         RectPanelFrom = FromTransicion.GetComponent<RectTransform>();
         RectPanelTo = toTransicion.GetComponent<RectTransform>();
