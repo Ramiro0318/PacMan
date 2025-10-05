@@ -2,28 +2,67 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
-public class ControlEnEscena: MonoBehaviour
+public class ControlEnEscena : MonoBehaviour
 {
-    public GameObject FromTrancision;
-    public GameObject ToTrancision;
-    Vector3 movimiento = Vector3.zero;
+    public GameObject FromTransicion;
+    Vector2 destino = new Vector3(0, 0);
+    RectTransform RectPanelTo;
+    RectTransform RectPanelFrom;
+    bool enTransicion, enReversa;
 
-    public void Transicion(GameObject btn) 
+    public void Transicion(GameObject toTransicion)
     {
-        FromTrancision.SetActive(false);
-        ToTrancision.SetActive(true);
-        EventSystem.current.SetSelectedGameObject(btn);
+
+        toTransicion.SetActive(true);
+
+        RectPanelFrom = FromTransicion.GetComponent<RectTransform>();
+        RectPanelTo = toTransicion.GetComponent<RectTransform>();
+        //EnTransicion |= RectPanel.GetComponent<bool>();
+        enTransicion = true;
+
+
+    }
+    public void TransicionReversa(GameObject toTransicion)
+    {
+        //FromTransicion.SetActive(true);
+        //toTransicion.SetActive(false);
+
+        RectPanelFrom = FromTransicion.GetComponent<RectTransform>();
+        RectPanelTo = toTransicion.GetComponent<RectTransform>();
+
+        enTransicion = true;
+        enReversa = true;
 
     }
 
-    public void TransicionReversa(GameObject btn) 
+    private void Update()
     {
-        FromTrancision.SetActive(true);
-        ToTrancision.SetActive(false);
-        EventSystem.current.SetSelectedGameObject(btn);
+        if (enTransicion && !enReversa && RectPanelTo != null)
+        {
+            RectPanelFrom.anchoredPosition = Vector2.MoveTowards(RectPanelFrom.anchoredPosition, new Vector2(-RectPanelFrom.rect.width, 0), 500f * Time.deltaTime);
+            RectPanelTo.anchoredPosition = Vector2.MoveTowards(RectPanelTo.anchoredPosition, destino, 500f * Time.deltaTime);
 
+            if (RectPanelTo.anchoredPosition == destino)
+            {
+                enTransicion = false;
+
+            }
+        }
+        else if (enTransicion && enReversa && RectPanelTo != null)
+        {
+            RectPanelFrom.anchoredPosition = Vector2.MoveTowards(RectPanelFrom.anchoredPosition, new Vector2(0, 0), 500f * Time.deltaTime);
+            RectPanelTo.anchoredPosition = Vector2.MoveTowards(RectPanelTo.anchoredPosition, new Vector2(RectPanelTo.rect.width, 0), 500f * Time.deltaTime);
+
+            if (RectPanelFrom.anchoredPosition == destino)
+            {
+                enTransicion = false;
+                enReversa = false;
+
+            }
+        }
     }
 
 
-   
+
+
 }
