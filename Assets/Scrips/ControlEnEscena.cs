@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class ControlEnEscena : MonoBehaviour
 {
     public GameObject FromTransicion;
+    GameObject ToTransicion;
     Vector2 destino = new Vector3(0, 0);
     RectTransform RectPanelTo;
     RectTransform RectPanelFrom;
@@ -12,8 +13,10 @@ public class ControlEnEscena : MonoBehaviour
 
     public void Transicion(GameObject toTransicion)
     {
-
+        ToTransicion = toTransicion;
+        FromTransicion.SetActive(true);
         toTransicion.SetActive(true);
+        Debug.Log( toTransicion.name);
 
         RectPanelFrom = FromTransicion.GetComponent<RectTransform>();
         RectPanelTo = toTransicion.GetComponent<RectTransform>();
@@ -24,7 +27,7 @@ public class ControlEnEscena : MonoBehaviour
     }
     public void TransicionReversa(GameObject toTransicion)
     {
-        //FromTransicion.SetActive(true);
+        FromTransicion.SetActive(true);
         //toTransicion.SetActive(false);
 
         RectPanelFrom = FromTransicion.GetComponent<RectTransform>();
@@ -45,7 +48,7 @@ public class ControlEnEscena : MonoBehaviour
             if (RectPanelTo.anchoredPosition == destino)
             {
                 enTransicion = false;
-
+                FromTransicion.SetActive(false);
             }
         }
         else if (enTransicion && enReversa && RectPanelTo != null)
@@ -57,7 +60,7 @@ public class ControlEnEscena : MonoBehaviour
             {
                 enTransicion = false;
                 enReversa = false;
-
+                ToTransicion.SetActive(false);
             }
         }
     }

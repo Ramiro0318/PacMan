@@ -3,20 +3,25 @@ using UnityEngine.EventSystems;
 
 public class UIStarter : MonoBehaviour
 {
-    public GameObject btnInicio;
+    public GameObject BtnDefault;
+
+    public void Seleccionado(GameObject btn)
+    {
+
+        EventSystem.current.SetSelectedGameObject(btn);
+
+
+    }
 
     void Start()
     {
-        if (btnInicio != null)
-        {
-            EventSystem.current.SetSelectedGameObject(null);
-            EventSystem.current.SetSelectedGameObject(btnInicio);
-        }
-        else { 
-        
-        
-        }
+        //var btnDefault = GameObject.Find("btnInicio");
+        EventSystem.current.SetSelectedGameObject(null);
+        Seleccionado(BtnDefault);
+
     }
+
+
 
 
 }
