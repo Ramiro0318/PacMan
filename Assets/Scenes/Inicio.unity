@@ -277,6 +277,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 793105811}
+        m_TargetAssemblyTypeName: ManejarSonidos, Assembly-CSharp
+        m_MethodName: ReproducirSonido
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Siguiente-Aceptar
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 770499893}
         m_TargetAssemblyTypeName: ManejarMusica, Assembly-CSharp
         m_MethodName: SilenciarMusica
@@ -284,18 +296,6 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 770499891}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1442,7 +1442,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Vector3(1,1,1)
+          m_StringArgument: Siguiente-Aceptar
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &460005547
@@ -2156,9 +2156,6 @@ MonoBehaviour:
   iconImage: {fileID: 1399661935}
   muteIcon: {fileID: -8405706448809980990, guid: 53812e2a18029db4bb6367dac62fdd37, type: 3}
   unmuteIcon: {fileID: -1938746175346547901, guid: 53812e2a18029db4bb6367dac62fdd37, type: 3}
-  SonidoIconImage: {fileID: 1716682608}
-  SonidoMuteIcon: {fileID: 7318935384755500631, guid: 1c56eaa06d5855d4cb4c311e229b881d, type: 3}
-  SonidoUnmuteIcon: {fileID: -1637693330697442592, guid: 1c56eaa06d5855d4cb4c311e229b881d, type: 3}
 --- !u!1 &778273283
 GameObject:
   m_ObjectHideFlags: 0
@@ -2576,8 +2573,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be8ed3f4b1c023f4297696ca89e96b98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ManejarSonidos
-  SonidoAceptar: {fileID: 793105810}
-  SonidoCancelar: {fileID: 793105809}
+  audioSources:
+  - {fileID: 793105810}
+  - {fileID: 793105809}
+  sonidoAceptar: {fileID: 793105810}
+  sonidoCancelar: {fileID: 793105809}
+  iconImage: {fileID: 1716682608}
+  sonidoMuteIcon: {fileID: 7318935384755500631, guid: 1c56eaa06d5855d4cb4c311e229b881d, type: 3}
+  sonidoUnmuteIcon: {fileID: -1637693330697442592, guid: 1c56eaa06d5855d4cb4c311e229b881d, type: 3}
 --- !u!1 &816700147
 GameObject:
   m_ObjectHideFlags: 0
@@ -2667,7 +2670,19 @@ MonoBehaviour:
   m_Value: 10
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 793105811}
+        m_TargetAssemblyTypeName: ManejarSonidos, Assembly-CSharp
+        m_MethodName: CambiarVolumen
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 816700147}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &842667827
 GameObject:
   m_ObjectHideFlags: 0
@@ -4570,18 +4585,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 157543127}
-        m_TargetAssemblyTypeName: ManejarEscenas, Assembly-CSharp
-        m_MethodName: IrAEscena
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Nivel1
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 793105811}
         m_TargetAssemblyTypeName: ManejarSonidos, Assembly-CSharp
         m_MethodName: ReproducirSonido
@@ -4592,6 +4595,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: Siguiente-Aceptar
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 157543127}
+        m_TargetAssemblyTypeName: ManejarEscenas, Assembly-CSharp
+        m_MethodName: IrAEscena
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Nivel1
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1508887479
@@ -6070,7 +6085,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 708313507}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.9842949
+  m_Size: 0.996462
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -6800,7 +6815,19 @@ MonoBehaviour:
   m_Value: 10
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 770499893}
+        m_TargetAssemblyTypeName: ManejarMusica, Assembly-CSharp
+        m_MethodName: CambiarVolumen
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1945066190}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1979054503
 GameObject:
   m_ObjectHideFlags: 0
@@ -6837,7 +6864,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -134.99963}
+  m_AnchoredPosition: {x: 0, y: -134.99979}
   m_SizeDelta: {x: 464, y: 231.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1979054505
@@ -6948,7 +6975,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1984138458}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 793105811}
+        m_TargetAssemblyTypeName: ManejarSonidos, Assembly-CSharp
+        m_MethodName: ReproducirSonido
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Siguiente-Aceptar
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 793105811}
+        m_TargetAssemblyTypeName: ManejarSonidos, Assembly-CSharp
+        m_MethodName: SilenciarSonido
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1984138458
 MonoBehaviour:
   m_ObjectHideFlags: 0

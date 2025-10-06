@@ -18,12 +18,6 @@ public class ManejarMusica: MonoBehaviour
     public Sprite muteIcon;
     public Sprite unmuteIcon;
 
-    //Sonido
-    public Image SonidoIconImage;
-    public Sprite SonidoMuteIcon;
-    public Sprite SonidoUnmuteIcon;
-    private bool sonidoMute = false;
-
 
     void Start()
     {
@@ -48,12 +42,6 @@ public class ManejarMusica: MonoBehaviour
         audioSource.mute = mute;
         iconImage.sprite = mute ? muteIcon : unmuteIcon;
 
-    }
-
-    public void SilenciarSonido()
-    {
-        sonidoMute = !sonidoMute;
-        SonidoIconImage.sprite = sonidoMute ? SonidoMuteIcon : SonidoUnmuteIcon;
     }
 
     public void CambiarVolumen(GameObject sldMusica) 

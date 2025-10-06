@@ -1,28 +1,67 @@
+using NUnit.Framework.Constraints;
+using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
+using UnityEngine.Audio;
+using UnityEngine.UI;
 
 public class ManejarSonidos : MonoBehaviour
 {
-    public AudioSource SonidoAceptar;
-    public AudioSource SonidoCancelar;
-    public void ReproducirSonido(string tag) 
+
+    public List<AudioSource> audioSources = new();
+    public AudioSource sonidoAceptar;
+    public AudioSource sonidoCancelar;
+
+    //Sonido
+    public Image iconImage;
+    public Sprite sonidoMuteIcon;
+    public Sprite sonidoUnmuteIcon;
+    private bool mute = false;
+    public void ReproducirSonido(string tag)
     {
 
-        if (SonidoAceptar != null && tag == "Siguiente-Aceptar")
+        if (sonidoAceptar != null && tag == "Siguiente-Aceptar")
         {
-            SonidoAceptar.Play();
-            
+            sonidoAceptar.Play();
+
 
         }
-        else if (SonidoCancelar != null && tag == "Anterior-Cancelar")
+        else if (sonidoCancelar != null && tag == "Anterior-Cancelar")
         {
-            SonidoCancelar.Play();
+            sonidoCancelar.Play();
         }
 
     }
-
-
-    void Update()
+    public void SilenciarSonido()
     {
-        
+        mute = !mute;
+        foreach (var audioS in audioSources)
+        {
+            if (audioS != null)
+            {
+                audioS.mute = mute;
+            }
+        }
+        iconImage.sprite = mute ? sonidoMuteIcon : sonidoUnmuteIcon;
     }
+
+    public void CambiarVolumen(GameObject sldMusica)
+    {
+        //audioSource.volume = sldMusica.CloneViaFakeSerialization().GetComponent<Slider>().value;
+        var volumen = sldMusica.GetComponent<Slider>().value * .10f;
+
+        mute = volumen == 0;
+        foreach (var audioS in audioSources)
+        {
+
+
+            if (audioS != null)
+            {
+                audioS.volume = volumen;
+                audioS.mute = mute;
+            }
+        }
+            iconImage.sprite = mute ? sonidoMuteIcon : sonidoUnmuteIcon;
+    }
+   
 }
