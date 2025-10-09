@@ -10,26 +10,31 @@ public class SimplePacmanMove : MonoBehaviour
     public float collisionCheckDistance = 0.09f;
     public LayerMask wallLayer = LayerMask.GetMask("Wall");
 
-    
-    public GameObject gameOverPanel; 
+
+    public GameObject gameOverPanel;
     public bool isDead = false;
-    public float respawnTime = 3f; 
+    public float respawnTime = 3f;
 
     private Animator _animator;
     private Vector2 movementInput = Vector2.zero;
     private Vector2 lastDirection = Vector2.right;
     private bool hasInputThisFrame = false;
-    private Vector3 initialPosition; 
+    private Vector3 initialPosition;
+
+    // Sistema de vidas
+    public int maxLives = 3;
+    private int currentLives;
+    private bool isRespawning = false;
 
     private void Awake()
     {
         _animator = GetComponent<Animator>();
-        initialPosition = transform.position; 
+        initialPosition = transform.position;
+        currentLives = maxLives; // Inicializar con todas las vidas
     }
 
     void Update()
     {
-
         HandleInput();
         TryMove();
     }
@@ -82,7 +87,7 @@ public class SimplePacmanMove : MonoBehaviour
 
     void TryMove()
     {
-        if (isDead) return;
+        if (isDead || isRespawning) return;
 
         if (movementInput.magnitude > 0.1f)
         {
@@ -107,40 +112,83 @@ public class SimplePacmanMove : MonoBehaviour
 
     public void Die()
     {
-        if (isDead) return;
+        if (isDead || isRespawning) return;
+
+        // Reducir una vida
+        currentLives--;
 
         isDead = true;
 
-        
+        // Actualizar animación
         _animator.SetBool("Muerto", true);
 
         movementInput = Vector2.zero;
         lastDirection = Vector2.zero;
 
+        Debug.Log($"Pacman ha muerto! Vidas restantes: {currentLives}");
+
+        // Verificar si quedan vidas
+        if (currentLives <= 0)
+        {
+            GameOver();
+        }
+        else
+        {
+            // Respawn después de un tiempo
+            Invoke("Respawn", respawnTime);
+        }
+    }
+
+    void Respawn()
+    {
+        if (currentLives <= 0) return;
+
+        isDead = false;
+        isRespawning = true;
+        transform.position = initialPosition;
+
+        // Resetear dirección
+        lastDirection = Vector2.right;
+        movementInput = Vector2.zero;
+
+        _animator.SetBool("Muerto", false);
+
+        Debug.Log($"Pacman ha resucitado! Vidas restantes: {currentLives}");
+
+        // Pequeño delay de invencibilidad después del respawn
+        Invoke("EndRespawn", 1f);
+    }
+
+    void EndRespawn()
+    {
+        isRespawning = false;
+    }
+
+    // Agregar este método a la clase SimplePacmanMove
+    public void GameOver()
+    {
         if (gameOverPanel != null)
             gameOverPanel.SetActive(true);
 
-        Debug.Log("Pacman ha muerto!");
+        isDead = true;
+        movementInput = Vector2.zero;
+        lastDirection = Vector2.zero;
 
-      
+        Debug.Log("Game Over activado desde PelletGenerator");
     }
 
-    //void Respawn()
-    //{
-    //    isDead = false;
-    //    transform.position = initialPosition;
+    // Método público para obtener las vidas actuales (útil para UI)
+    public int GetCurrentLives()
+    {
+        return currentLives;
+    }
 
-    //    
-    //    lastDirection = Vector2.right;
-    //    movementInput = Vector2.zero;
+    // Método público para obtener las vidas máximas (útil para UI)
+    public int GetMaxLives()
+    {
+        return maxLives;
+    }
 
-    //    if (gameOverPanel != null)
-    //        gameOverPanel.SetActive(false);
-
-    //    _animator.SetBool("Muerto", false);
-
-    //    Debug.Log("Pacman ha resucitado!");
-    //}
 
     void OnGUI()
     {
@@ -148,5 +196,7 @@ public class SimplePacmanMove : MonoBehaviour
         GUI.Label(new Rect(10, 30, 300, 20), $"Última Dirección: {lastDirection}");
         GUI.Label(new Rect(10, 50, 300, 20), $"Input este frame: {hasInputThisFrame}");
         GUI.Label(new Rect(10, 70, 300, 20), $"Estado: {(isDead ? "MUERTO" : "VIVO")}");
+        GUI.Label(new Rect(10, 90, 300, 20), $"Vidas: {currentLives}/{maxLives}");
+        GUI.Label(new Rect(10, 110, 300, 20), $"Respawning: {isRespawning}");
     }
 }
