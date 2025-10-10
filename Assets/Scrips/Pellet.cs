@@ -6,6 +6,11 @@ public class Pellet : MonoBehaviour
     public bool isBigPellet = false;
     public PelletGenerator pelletGenerator;
 
+    private void Start()
+    {
+        gameObject.tag = "Pallets";
+    }
+
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))

@@ -1,4 +1,5 @@
 using Unity.VisualScripting;
+using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
@@ -16,12 +17,6 @@ public class ManejarMusica: MonoBehaviour
     public Image iconImage;
     public Sprite muteIcon;
     public Sprite unmuteIcon;
-
-    //Sonido
-    public Image SonidoIconImage;
-    public Sprite SonidoMuteIcon;
-    public Sprite SonidoUnmuteIcon;
-    private bool sonidoMute = false;
 
 
     void Start()
@@ -41,22 +36,26 @@ public class ManejarMusica: MonoBehaviour
         }
     }
 
-
-
-
     public void SilenciarMusica()
     {
         mute = !mute;
         audioSource.mute = mute;
         iconImage.sprite = mute ? muteIcon : unmuteIcon;
+
     }
 
-    public void SilenciarSonido()
+    public void CambiarVolumen(GameObject sldMusica) 
     {
-        sonidoMute = !sonidoMute;
-        SonidoIconImage.sprite = sonidoMute ? SonidoMuteIcon : SonidoUnmuteIcon;
+        //audioSource.volume = sldMusica.CloneViaFakeSerialization().GetComponent<Slider>().value;
+        audioSource.volume = sldMusica.GetComponent<Slider>().value * .10f;
+        if (audioSource.volume == 0)
+        {
+            mute = true;
+        }
+        else mute = false;
+
+        audioSource.mute = mute;
+        iconImage.sprite = mute ? muteIcon : unmuteIcon;
     }
-
-
 
 }
