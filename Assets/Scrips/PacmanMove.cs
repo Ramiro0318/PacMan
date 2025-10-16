@@ -167,14 +167,26 @@ public class SimplePacmanMove : MonoBehaviour
     // Agregar este método a la clase SimplePacmanMove
     public void GameOver()
     {
+        Debug.Log("GameOver() llamado en SimplePacmanMove");
+
         if (gameOverPanel != null)
+        {
             gameOverPanel.SetActive(true);
+            Debug.Log("Panel de Game Over activado");
+        }
+        else
+        {
+            Debug.LogWarning("gameOverPanel no asignado en el inspector");
+        }
 
         isDead = true;
         movementInput = Vector2.zero;
         lastDirection = Vector2.zero;
 
-        Debug.Log("Game Over activado desde PelletGenerator");
+        // Detener el tiempo del juego
+        Time.timeScale = 0f;
+
+        Debug.Log("Game Over completado");
     }
 
     // Método público para obtener las vidas actuales (útil para UI)

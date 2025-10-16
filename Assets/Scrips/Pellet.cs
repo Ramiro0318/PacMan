@@ -9,6 +9,12 @@ public class Pellet : MonoBehaviour
     private void Start()
     {
         gameObject.tag = "Pallets";
+
+        // Buscar el generator si no está asignado
+        if (pelletGenerator == null)
+        {
+            pelletGenerator = FindObjectOfType<PelletGenerator>();
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other)

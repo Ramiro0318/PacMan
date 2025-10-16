@@ -8,19 +8,21 @@ public class ControlPausa : MonoBehaviour
 {
     public GameObject CanvasPausa;
     public GameObject btnDefault;
-    
-    Keyboard keyboard = Keyboard.current;
-    Animator anim;
 
+    Keyboard keyboard;
+    Animator anim;
     private bool pausa = false;
 
     private void Start()
     {
+        keyboard = Keyboard.current; // Mover aquí para evitar null reference
+
         if (CanvasPausa != null)
             CanvasPausa.SetActive(false);
+
         foreach (Animator anim in FindObjectsByType<Animator>(FindObjectsSortMode.None))
         {
-                anim.enabled = true;
+            anim.enabled = true;
         }
         Time.timeScale = 1f;
     }
@@ -33,31 +35,33 @@ public class ControlPausa : MonoBehaviour
     public void CambiarPausa()
     {
         if (keyboard == null) return;
+
+        // CORREGIDO: Estructura condicional correcta
         if (keyboard.escapeKey.wasPressedThisFrame)
-        //Input.GetButtonDown("Cancel"))
         {
             if (pausa)
             {
-                DesactivarPausa(); //Desactivar
+                DesactivarPausa();
             }
             else
-            {   //Activar Pausa
+            {
+                // Activar Pausa
                 CanvasPausa.SetActive(true);
                 EventSystem.current.SetSelectedGameObject(btnDefault);
 
                 foreach (Animator anim in FindObjectsByType<Animator>(FindObjectsSortMode.None))
                 {
-                    //if (anim.CompareTag("Personaje"))
+                    if (anim.CompareTag("Personaje"))
                     {
                         anim.enabled = false;
                     }
                 }
                 Time.timeScale = 0f;
-                
+
                 pausa = true;
                 Debug.Log($"Pausa = {pausa}");
             }
-        } 
+        }
     }
 
     public void DesactivarPausa()
@@ -66,7 +70,7 @@ public class ControlPausa : MonoBehaviour
         Time.timeScale = 1f;
         foreach (Animator anim in FindObjectsByType<Animator>(FindObjectsSortMode.None))
         {
-            //if (anim.CompareTag("Personaje"))
+            if (anim.CompareTag("Personaje"))
             {
                 anim.enabled = true;
             }
@@ -76,6 +80,3 @@ public class ControlPausa : MonoBehaviour
         Debug.Log($"Pausa = {pausa}");
     }
 }
-
-
-

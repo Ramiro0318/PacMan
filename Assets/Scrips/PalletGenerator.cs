@@ -44,6 +44,12 @@ public class PelletGenerator : MonoBehaviour
     private int totalPellets = 0;
     private int pelletsEaten = 0;
 
+    // Eventos para UI
+    public System.Action<int> OnScoreChanged;
+    public System.Action<bool> OnPowerStateChanged;
+    public System.Action<float> OnPowerTimeChanged;
+
+
     void Start()
     {
         // Obtener o crear AudioSource
@@ -54,7 +60,7 @@ public class PelletGenerator : MonoBehaviour
             audioSource.playOnAwake = false;
         }
 
-        // Encontrar todos los fantasmas
+        // Encontrar todos los fantasmas INMEDIATAMENTE
         FindAllGhosts();
 
         Invoke("GeneratePelletsFromTilemap", 0.1f);
@@ -65,6 +71,8 @@ public class PelletGenerator : MonoBehaviour
         if (isPowerActive)
         {
             powerTimer -= Time.deltaTime;
+            OnPowerTimeChanged?.Invoke(powerTimer);
+
             if (powerTimer <= 0f)
             {
                 DeactivatePower();
@@ -80,11 +88,16 @@ public class PelletGenerator : MonoBehaviour
 
     void FindAllGhosts()
     {
+        allGhosts.Clear(); // Limpiar lista primero
         GhostController[] ghosts = FindObjectsOfType<GhostController>();
         allGhosts.AddRange(ghosts);
-        Debug.Log($"Encontrados {allGhosts.Count} fantasmas");
-    }
+        Debug.Log($"Encontrados {allGhosts.Count} fantasmas:");
 
+        foreach (GhostController ghost in allGhosts)
+        {
+            Debug.Log($" - {ghost.gameObject.name} en estado: {ghost.GetCurrentState()}");
+        }
+    }
     void GeneratePelletsFromTilemap()
     {
         if (pelletTilemap == null)
@@ -301,89 +314,134 @@ public class PelletGenerator : MonoBehaviour
         totalScore += points;
         pelletsEaten++;
 
-        Debug.Log($"¡Pellet {(isBigPellet ? "grande" : "normal")} comido! +{points} puntos. Puntuación total: {totalScore}");
+        Debug.Log($"¡Pellet {(isBigPellet ? "grande" : "normal")} comido! +{points} puntos");
         Debug.Log($"Pellets comidos: {pelletsEaten}/{totalPellets}");
-
-        // Verificar si se comieron todos los pellets
-        CheckAllPelletsEaten();
 
         // Activar power-up si es pellet grande
         if (isBigPellet)
         {
+            Debug.Log("¡Big Pellet comido! Activando power-up...");
             ActivatePower();
         }
+
+        // Verificar si se comieron todos los pellets
+        CheckAllPelletsEaten();
     }
 
     void CheckAllPelletsEaten()
     {
-        Debug.Log($"Verificando pellets: {pelletsEaten}/{totalPellets}");
+        Debug.Log($"=== VERIFICANDO PELLETS ===");
+        Debug.Log($"Contador interno: {pelletsEaten}/{totalPellets}");
 
-        if (pelletsEaten >= totalPellets)
+        // Verificación MANUAL de todos los pellets en escena
+        Pellet[] remainingPellets = FindObjectsOfType<Pellet>();
+        int actualPelletsCount = remainingPellets.Length;
+
+        Debug.Log($"Pellets reales en escena: {actualPelletsCount}");
+        Debug.Log($"Big pellets en lista: {bigPellets.Count}");
+
+        // Verificar si realmente no quedan pellets
+        if (actualPelletsCount == 0)
         {
-            Debug.Log("¡Todos los pellets han sido comidos! Nivel completado.");
-
-            // Verificación adicional
-            Pellet[] remainingPellets = FindObjectsOfType<Pellet>();
-            if (remainingPellets.Length == 0)
-            {
-                Debug.Log("Confirmado: No quedan pellets en la escena");
-                GameOver();
-            }
-            else
-            {
-                Debug.LogWarning($"Aún hay {remainingPellets.Length} pellets en la escena pero el contador dice que todos fueron comidos");
-            }
+            Debug.Log("¡CONFIRMADO: No quedan pellets en la escena!");
+            Debug.Log("¡NIVEL COMPLETADO!");
+            GameOver();
+        }
+        else if (pelletsEaten >= totalPellets)
+        {
+            Debug.Log("Contador interno indica nivel completado");
+            Debug.Log($"Pero aún hay {actualPelletsCount} pellets en escena");
+            Debug.Log("Forzando game over por contador interno...");
+            GameOver();
         }
         else
         {
-            Debug.Log($"Quedan {totalPellets - pelletsEaten} pellets por comer");
+            Debug.Log($"Quedan {actualPelletsCount} pellets por comer");
+            Debug.Log($"Contador interno: {pelletsEaten}/{totalPellets}");
         }
     }
 
+
     void GameOver()
     {
-        Debug.Log("Cargando escena de Game Over...");
+        Debug.Log("=== GAME OVER ACTIVADO ===");
 
-        // Aquí puedes elegir cómo manejar el game over:
-        // Opción 1: Cargar escena de game over
-        if (!string.IsNullOrEmpty(gameOverSceneName))
+        // Buscar el script de Pacman y activar su game over
+        SimplePacmanMove pacman = FindObjectOfType<SimplePacmanMove>();
+        if (pacman != null)
         {
-            SceneManager.LoadScene(gameOverSceneName);
+            Debug.Log("Activando Game Over en Pacman...");
+            pacman.GameOver();
         }
-        // Opción 2: Mostrar panel de game over (si prefieres mantenerlo en la misma escena)
         else
         {
-            // Buscar el script de Pacman y activar su game over
-            SimplePacmanMove pacman = FindObjectOfType<SimplePacmanMove>();
-            if (pacman != null)
+            Debug.LogError("No se encontró SimplePacmanMove en la escena!");
+
+            // Fallback: cargar escena de game over
+            if (!string.IsNullOrEmpty(gameOverSceneName))
             {
-                pacman.GameOver();
+                Debug.Log($"Cargando escena: {gameOverSceneName}");
+                SceneManager.LoadScene(gameOverSceneName);
             }
         }
     }
 
     void ActivatePower()
     {
-        isPowerActive = true;
-        powerTimer = ghostVulnerableTime;
+        // DEBUG: Verificar qué está pasando
+        Debug.Log("=== ACTIVANDO POWER-UP ===");
+        Debug.Log($"isPowerActive: {isPowerActive}");
+        Debug.Log($"Número de fantasmas: {allGhosts.Count}");
 
-        // Hacer todos los fantasmas vulnerables
-        foreach (GhostController ghost in allGhosts)
+        // Si ya hay un power-up activo, reiniciar el timer
+        if (isPowerActive)
         {
-            if (ghost != null && ghost.IsAlive())
+            powerTimer = ghostVulnerableTime;
+            Debug.Log("Power-up reiniciado");
+        }
+        else
+        {
+            isPowerActive = true;
+            powerTimer = ghostVulnerableTime;
+            OnPowerStateChanged?.Invoke(true);
+
+            Debug.Log("Nuevo power-up activado");
+
+            // Hacer todos los fantasmas vulnerables
+            foreach (GhostController ghost in allGhosts)
             {
-                ghost.SetVulnerable(vulnerableGhostSprite, ghostVulnerableTime);
+                if (ghost != null)
+                {
+                    Debug.Log($"Procesando fantasma: {ghost.gameObject.name}");
+                    Debug.Log($" - Está vivo: {ghost.IsAlive()}");
+                    Debug.Log($" - Estado actual: {ghost.GetCurrentState()}");
+
+                    if (ghost.IsAlive())
+                    {
+                        ghost.SetVulnerable(vulnerableGhostSprite, ghostVulnerableTime);
+                        Debug.Log($" - {ghost.gameObject.name} hecho vulnerable");
+                    }
+                    else
+                    {
+                        Debug.Log($" - {ghost.gameObject.name} no está vivo, ignorando");
+                    }
+                }
+                else
+                {
+                    Debug.LogWarning("Fantasma nulo encontrado en la lista");
+                }
             }
         }
 
         Debug.Log("¡POWER-UP ACTIVADO! Fantasmas vulnerables por " + ghostVulnerableTime + " segundos");
     }
 
+
     void DeactivatePower()
     {
         isPowerActive = false;
+        OnPowerStateChanged?.Invoke(false);
 
-        // Restaurar fantasmas a estado normal
         foreach (GhostController ghost in allGhosts)
         {
             if (ghost != null)
@@ -397,17 +455,16 @@ public class PelletGenerator : MonoBehaviour
 
     public void OnGhostEaten(GhostController ghost)
     {
-        // Reproducir sonido de fantasma comido
         if (audioSource != null && ghostEatenSound != null)
         {
             audioSource.PlayOneShot(ghostEatenSound);
         }
 
-        // Añadir puntos
         totalScore += ghostEatenPoints;
+        OnScoreChanged?.Invoke(totalScore);
+
         Debug.Log($"¡Fantasma comido! +{ghostEatenPoints} puntos. Puntuación total: {totalScore}");
 
-        // Iniciar respawn del fantasma
         ghost.StartRespawn(deadGhostSprite, ghostRespawnTime);
     }
 
@@ -436,4 +493,36 @@ public class PelletGenerator : MonoBehaviour
     {
         return totalPellets - pelletsEaten;
     }
+    public void ForceFindGhosts()
+    {
+        FindAllGhosts();
+    }
+    void OnGUI()
+    {
+        GUI.Label(new Rect(10, 10, 400, 20), $"Pellets: {pelletsEaten}/{totalPellets} - En escena: {FindObjectsOfType<Pellet>().Length}");
+        GUI.Label(new Rect(10, 30, 400, 20), $"Power Active: {isPowerActive} - Time: {powerTimer:F1}");
+        GUI.Label(new Rect(10, 50, 400, 20), $"Fantasmas: {allGhosts.Count} - Vulnerables: {CountVulnerableGhosts()}");
+
+        if (GUI.Button(new Rect(10, 80, 200, 30), "Forzar Power-Up"))
+        {
+            ActivatePower();
+        }
+
+        if (GUI.Button(new Rect(10, 120, 200, 30), "Buscar Fantasmas"))
+        {
+            FindAllGhosts();
+        }
+    }
+
+    int CountVulnerableGhosts()
+    {
+        int count = 0;
+        foreach (GhostController ghost in allGhosts)
+        {
+            if (ghost != null && ghost.IsVulnerable())
+                count++;
+        }
+        return count;
+    }
+
 }
