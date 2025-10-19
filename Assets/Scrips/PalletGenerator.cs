@@ -304,10 +304,19 @@ public class PelletGenerator : MonoBehaviour
         if (audioSource != null)
         {
             AudioClip soundToPlay = isBigPellet ? bigPelletSound : pelletSound;
-            if (soundToPlay != null)
+            //if (soundToPlay != null)
+            //{
+            //    audioSource.PlayOneShot(soundToPlay);
+            //}
+            if (!audioSource.isPlaying || (audioSource.isPlaying & audioSource.time > 0.6))
             {
-                audioSource.PlayOneShot(soundToPlay);
+                audioSource.clip = soundToPlay;
+                audioSource.Play();
+                
+                
             }
+
+
         }
 
         // Actualizar puntuación
