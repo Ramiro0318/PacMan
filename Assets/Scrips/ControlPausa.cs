@@ -45,6 +45,7 @@ public class ControlPausa : MonoBehaviour
             }
             else
             {
+                Debug.Log(CanvasPausa);
                 // Activar Pausa
                 CanvasPausa.SetActive(true);
                 EventSystem.current.SetSelectedGameObject(btnDefault);
