@@ -69,7 +69,26 @@ public class ControlPausa : MonoBehaviour
             }
             else
             {
+<<<<<<< HEAD
                 ActivarPausa();
+=======
+                Debug.Log(CanvasPausa);
+                // Activar Pausa
+                CanvasPausa.SetActive(true);
+                EventSystem.current.SetSelectedGameObject(btnDefault);
+
+                foreach (Animator anim in FindObjectsByType<Animator>(FindObjectsSortMode.None))
+                {
+                    if (anim.CompareTag("Personaje"))
+                    {
+                        anim.enabled = false;
+                    }
+                }
+                Time.timeScale = 0f;
+
+                pausa = true;
+                Debug.Log($"Pausa = {pausa}");
+>>>>>>> origin/Desarrollo
             }
         }
     }
