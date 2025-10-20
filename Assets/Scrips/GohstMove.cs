@@ -1,368 +1,161 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class GohstMove : MonoBehaviour
+public class ImprovedGhostMove : MonoBehaviour
 {
-    public float moveSpeed = 3f;
+    [Header("Configuración")]
+    public float moveSpeed = 2f;
     public LayerMask wallLayer;
-    public string playerTag = "Player";
-    public string pelletTag = "Pellets";
+    public float directionChangeTime = 3f;
+    public float raycastDistance = 0.5f;
 
-    // Configuración de IA
-    public float directionChangeInterval = 1.5f;
-    public float randomDirectionChance = 0.2f;
-    public int maxStuckChecks = 5;
+    [Header("Debug")]
+    public bool showDebugRays = true;
 
     private Vector2 currentDirection;
-    private Vector2[] possibleDirections = {
-        Vector2.up, Vector2.down, Vector2.left, Vector2.right
-    };
-
+    private float timer;
     private Rigidbody2D rb;
-    private bool isChasing = true;
-    private Transform player;
-    private float lastDirectionChangeTime;
-    private Vector3 lastPosition;
-    private float stuckTimer;
-    private int consecutiveHorizontalMoves = 0;
-    private int consecutiveVerticalMoves = 0;
-    private Vector2 lastValidDirection;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        player = GameObject.FindGameObjectWithTag(playerTag).transform;
+
+        // Forzar inicialización del layer mask si es 0
+        if (wallLayer.value == 0)
+        {
+            wallLayer = LayerMask.GetMask("Wall");
+            Debug.Log("Wall layer set to: " + wallLayer.value);
+        }
 
         ChooseRandomDirection();
-        lastDirectionChangeTime = Time.time;
-        lastPosition = transform.position;
-        lastValidDirection = currentDirection;
+        timer = directionChangeTime;
 
-        if (wallLayer == 0)
-            wallLayer = LayerMask.GetMask("Default");
+        Debug.Log("Ghost started. Wall layer: " + wallLayer);
     }
 
     void Update()
     {
-        // Si el jugador está muerto, dejar de perseguir
-        SimplePacmanMove pacman = player?.GetComponent<SimplePacmanMove>();
-        if (pacman != null && pacman.isDead)
-        {
-            rb.linearVelocity = Vector2.zero;
-            return;
-        }
+        timer -= Time.deltaTime;
 
-        CheckIfStuck();
-
-        if (isChasing)
-        {
-            ChasePlayer();
-        }
-
-        MoveGhost();
-        CheckForDirectionChange();
-    }
-
-    void CheckIfStuck()
-    {
-        // Verificar si está atascado (no se mueve)
-        if (Vector3.Distance(transform.position, lastPosition) < 0.01f)
-        {
-            stuckTimer += Time.deltaTime;
-            if (stuckTimer > 1f) // Atascado por más de 1 segundo
-            {
-                Debug.Log("Fantasma atascado, forzando cambio de dirección");
-                ForceDirectionChange();
-                stuckTimer = 0f;
-            }
-        }
-        else
-        {
-            stuckTimer = 0f;
-        }
-
-        lastPosition = transform.position;
-
-        // Prevenir ciclos horizontales/verticales excesivos
-        if (IsHorizontalDirection(currentDirection))
-        {
-            consecutiveHorizontalMoves++;
-            consecutiveVerticalMoves = 0;
-        }
-        else
-        {
-            consecutiveVerticalMoves++;
-            consecutiveHorizontalMoves = 0;
-        }
-
-        // Forzar cambio de dirección si hay demasiados movimientos en la misma orientación
-        if (consecutiveHorizontalMoves > 3 || consecutiveVerticalMoves > 3)
-        {
-            ForceDirectionChange();
-        }
-    }
-
-    void MoveGhost()
-    {
-        rb.linearVelocity = currentDirection * moveSpeed;
-    }
-
-    void ChasePlayer()
-    {
-        if (player == null) return;
-
-        // Cambio de dirección por intervalo o aleatorio
-        if (Time.time - lastDirectionChangeTime > directionChangeInterval ||
-            Random.value < randomDirectionChance)
-        {
-            ChooseSmartDirection();
-            lastDirectionChangeTime = Time.time;
-            return;
-        }
-
-        Vector2 directionToPlayer = (player.position - transform.position).normalized;
-        Vector2 bestDirection = currentDirection;
-        float bestScore = -Mathf.Infinity;
-
-        // Obtener todas las direcciones válidas
-        List<Vector2> validDirections = GetValidDirections();
-
-        if (validDirections.Count == 0)
-        {
-            ForceDirectionChange();
-            return;
-        }
-
-        // Evaluar cada dirección válida
-        foreach (Vector2 direction in validDirections)
-        {
-            float score = CalculateDirectionScore(direction, directionToPlayer, validDirections.Count);
-
-            if (score > bestScore)
-            {
-                bestScore = score;
-                bestDirection = direction;
-            }
-        }
-
-        currentDirection = bestDirection;
-        lastValidDirection = bestDirection;
-    }
-
-    List<Vector2> GetValidDirections()
-    {
-        List<Vector2> validDirections = new List<Vector2>();
-
-        foreach (Vector2 direction in possibleDirections)
-        {
-            if (IsValidDirection(direction) && !IsOppositeDirection(direction, currentDirection))
-            {
-                validDirections.Add(direction);
-            }
-        }
-
-        // Si no hay direcciones válidas, permitir opuestas como último recurso
-        if (validDirections.Count == 0)
-        {
-            foreach (Vector2 direction in possibleDirections)
-            {
-                if (IsValidDirection(direction))
-                {
-                    validDirections.Add(direction);
-                }
-            }
-        }
-
-        return validDirections;
-    }
-
-    float CalculateDirectionScore(Vector2 direction, Vector2 directionToPlayer, int validDirectionCount)
-    {
-        float score = 0f;
-
-        // Puntuación por alineación con el jugador (35%)
-        score += Vector2.Dot(direction, directionToPlayer) * 0.35f;
-
-        // Puntuación por distancia al jugador (25%)
-        Vector2 projectedPosition = (Vector2)transform.position + direction;
-        float distanceToPlayer = Vector2.Distance(projectedPosition, player.position);
-        score += (1f / (distanceToPlayer + 0.1f)) * 0.25f;
-
-        // Penalizar cambios de dirección opuestos (15%)
-        if (IsOppositeDirection(direction, lastValidDirection))
-        {
-            score -= 0.15f;
-        }
-
-        // Favorecer cambio de orientación si hay muchos movimientos en la misma (15%)
-        if (consecutiveHorizontalMoves > 2 && !IsHorizontalDirection(direction))
-        {
-            score += 0.15f;
-        }
-        else if (consecutiveVerticalMoves > 2 && IsHorizontalDirection(direction))
-        {
-            score += 0.15f;
-        }
-
-        // Aleatoriedad (10%)
-        score += Random.Range(0f, 0.1f);
-
-        return score;
-    }
-
-    void ChooseSmartDirection()
-    {
-        if (player == null) return;
-
-        Vector2 directionToPlayer = (player.position - transform.position).normalized;
-        List<Vector2> validDirections = GetValidDirections();
-
-        if (validDirections.Count > 0)
-        {
-            Vector2 bestDirection = validDirections[0];
-            float bestScore = CalculateDirectionScore(validDirections[0], directionToPlayer, validDirections.Count);
-
-            for (int i = 1; i < validDirections.Count; i++)
-            {
-                float score = CalculateDirectionScore(validDirections[i], directionToPlayer, validDirections.Count);
-                if (score > bestScore)
-                {
-                    bestScore = score;
-                    bestDirection = validDirections[i];
-                }
-            }
-            currentDirection = bestDirection;
-        }
-        else
+        // Cambiar dirección periódicamente
+        if (timer <= 0f)
         {
             ChooseRandomDirection();
-        }
-    }
-
-    void ForceDirectionChange()
-    {
-        Debug.Log("Forzando cambio de dirección");
-
-        List<Vector2> validDirections = new List<Vector2>();
-
-        // Priorizar direcciones que cambien la orientación actual
-        foreach (Vector2 direction in possibleDirections)
-        {
-            if (IsValidDirection(direction))
-            {
-                if ((IsHorizontalDirection(currentDirection) && !IsHorizontalDirection(direction)) ||
-                    (!IsHorizontalDirection(currentDirection) && IsHorizontalDirection(direction)))
-                {
-                    validDirections.Add(direction);
-                }
-            }
+            timer = directionChangeTime;
         }
 
-        if (validDirections.Count > 0)
+        // Verificar si choca con pared
+        if (IsPathBlocked())
         {
-            currentDirection = validDirections[Random.Range(0, validDirections.Count)];
-        }
-        else
-        {
+            Debug.Log("Path blocked! Changing direction");
             ChooseRandomDirection();
+            timer = directionChangeTime;
         }
 
-        consecutiveHorizontalMoves = 0;
-        consecutiveVerticalMoves = 0;
-        lastDirectionChangeTime = Time.time;
-    }
-
-    bool IsValidDirection(Vector2 direction)
-    {
-        float rayLength = 0.8f; // Aumentado para mejor detección
-        RaycastHit2D hit = Physics2D.Raycast(
-            transform.position,
-            direction,
-            rayLength,
-            wallLayer
-        );
-
-        return hit.collider == null;
-    }
-
-    bool IsOppositeDirection(Vector2 dir1, Vector2 dir2)
-    {
-        return Vector2.Dot(dir1, dir2) < -0.9f;
-    }
-
-    bool IsHorizontalDirection(Vector2 direction)
-    {
-        return Mathf.Abs(direction.x) > Mathf.Abs(direction.y);
+        // Mover
+        Move();
     }
 
     void ChooseRandomDirection()
     {
+        Vector2[] allDirections = { Vector2.up, Vector2.down, Vector2.left, Vector2.right };
         List<Vector2> validDirections = new List<Vector2>();
 
-        foreach (Vector2 direction in possibleDirections)
+        Debug.Log("Choosing direction. Testing all directions:");
+
+        // Probar todas las direcciones
+        foreach (Vector2 dir in allDirections)
         {
-            if (IsValidDirection(direction))
+            bool isBlocked = IsDirectionBlocked(dir);
+            Debug.Log($"Direction {dir} - Blocked: {isBlocked}");
+
+            if (!isBlocked)
             {
-                validDirections.Add(direction);
+                validDirections.Add(dir);
             }
         }
 
+        // Elegir aleatoriamente entre direcciones válidas
         if (validDirections.Count > 0)
         {
             currentDirection = validDirections[Random.Range(0, validDirections.Count)];
+            Debug.Log($"Chose valid direction: {currentDirection}. Valid options: {validDirections.Count}");
+        }
+        else
+        {
+            // Si todas están bloqueadas, retroceder
+            currentDirection = -currentDirection;
+            Debug.Log($"All directions blocked! Reversing to: {currentDirection}");
         }
     }
 
-    void CheckForDirectionChange()
+    bool IsDirectionBlocked(Vector2 direction)
     {
-        // Verificar obstáculos más cercanos
-        float obstacleCheckDistance = 0.4f;
         RaycastHit2D hit = Physics2D.Raycast(
-            transform.position,
-            currentDirection,
-            obstacleCheckDistance,
+            (Vector2)transform.position + direction * 0.1f, // Pequeño offset desde el centro
+            direction,
+            raycastDistance,
             wallLayer
         );
 
-        if (hit.collider != null)
+        // Debug visual
+        if (showDebugRays)
         {
-            ChooseSmartDirection();
+            Debug.DrawRay(transform.position, direction * raycastDistance,
+                         hit.collider != null ? Color.red : Color.green, 1f);
+        }
+
+        return hit.collider != null;
+    }
+
+    bool IsPathBlocked()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(
+            (Vector2)transform.position + currentDirection * 0.1f,
+            currentDirection,
+            0.3f,
+            wallLayer
+        );
+
+        if (showDebugRays)
+        {
+            Debug.DrawRay(transform.position, currentDirection * 0.3f,
+                         hit.collider != null ? Color.magenta : Color.blue, 1f);
+        }
+
+        return hit.collider != null;
+    }
+
+    void Move()
+    {
+        if (rb != null)
+        {
+            rb.linearVelocity = currentDirection * moveSpeed;
+        }
+        else
+        {
+            transform.Translate(currentDirection * moveSpeed * Time.deltaTime);
         }
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    void OnGUI()
     {
-        if (other.CompareTag(playerTag))
-        {
-            SimplePacmanMove pacman = other.GetComponent<SimplePacmanMove>();
-            if (pacman != null && !pacman.isDead)
-            {
-                Debug.Log("Fantasma atrapó al jugador!");
-                pacman.Die();
-            }
-        }
-
-        if (other.CompareTag(pelletTag))
-        {
-            Physics2D.IgnoreCollision(other, GetComponent<Collider2D>());
-        }
+        // Mostrar información de debug en pantalla
+        GUI.Label(new Rect(10, 130, 400, 20), $"Ghost Direction: {currentDirection}");
+        GUI.Label(new Rect(10, 150, 400, 20), $"Timer: {timer:F2}");
+        GUI.Label(new Rect(10, 170, 400, 20), $"Wall Layer: {wallLayer.value}");
+        GUI.Label(new Rect(10, 190, 400, 20), $"Position: {transform.position}");
     }
 
     void OnDrawGizmos()
     {
-        // Dirección actual
-        Gizmos.color = Color.red;
-        Gizmos.DrawRay(transform.position, currentDirection * 1f);
+        if (!Application.isPlaying) return;
 
-        // Detección de obstáculos
+        // Dibujar información en el editor
         Gizmos.color = Color.yellow;
-        Gizmos.DrawRay(transform.position, currentDirection * 0.4f);
+        Gizmos.DrawWireSphere(transform.position, 0.2f);
 
-        // Rayos en todas las direcciones para debug
         Gizmos.color = Color.blue;
-        foreach (Vector2 dir in possibleDirections)
-        {
-            Gizmos.DrawRay(transform.position, dir * 0.3f);
-        }
+        Gizmos.DrawRay(transform.position, currentDirection * 0.5f);
     }
 }

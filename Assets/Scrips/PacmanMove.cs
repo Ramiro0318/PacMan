@@ -26,11 +26,16 @@ public class SimplePacmanMove : MonoBehaviour
     private int currentLives;
     private bool isRespawning = false;
 
+    public System.Action OnPacmanDeath; // Nuevo evento
+
     private void Awake()
     {
         _animator = GetComponent<Animator>();
         initialPosition = transform.position;
         currentLives = maxLives; // Inicializar con todas las vidas
+
+        // Notificar el estado inicial de vidas
+        OnLivesChanged?.Invoke(currentLives);
     }
 
     void Update()
@@ -117,6 +122,12 @@ public class SimplePacmanMove : MonoBehaviour
         // Reducir una vida
         currentLives--;
 
+        // Notificar cambio de vida
+        OnLivesChanged?.Invoke(currentLives);
+
+        // NUEVO: Notificar que Pacman murió
+        OnPacmanDeath?.Invoke();
+
         isDead = true;
 
         // Actualizar animación
@@ -201,7 +212,7 @@ public class SimplePacmanMove : MonoBehaviour
         return maxLives;
     }
 
-
+    public System.Action<int> OnLivesChanged; // Evento para cambios de vida
     void OnGUI()
     {
         GUI.Label(new Rect(10, 10, 300, 20), $"Movimiento: {movementInput}");

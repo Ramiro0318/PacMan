@@ -40,6 +40,9 @@ public class PelletGenerator : MonoBehaviour
     private bool isPowerActive = false;
     private float powerTimer = 0f;
 
+    private SimplePacmanMove pacman;
+
+
     // Contadores de pellets
     private int totalPellets = 0;
     private int pelletsEaten = 0;
@@ -64,6 +67,31 @@ public class PelletGenerator : MonoBehaviour
         FindAllGhosts();
 
         Invoke("GeneratePelletsFromTilemap", 0.1f);
+
+        pacman = FindObjectOfType<SimplePacmanMove>();
+        if (pacman != null)
+        {
+            pacman.OnPacmanDeath += OnPacmanDeath;
+        }
+    }
+    void OnPacmanDeath()
+    {
+        Debug.Log("PelletGenerator: Resetando fantasmas por muerte de Pacman");
+
+        foreach (GhostController ghost in allGhosts)
+        {
+            if (ghost != null)
+            {
+                ghost.ResetToSpawn();
+            }
+        }
+    }
+    private void OnDestroy()
+    {
+        if (pacman != null)
+        {
+            pacman.OnPacmanDeath -= OnPacmanDeath;
+        }
     }
 
     void Update()
@@ -312,21 +340,25 @@ public class PelletGenerator : MonoBehaviour
 
         // Actualizar puntuación
         totalScore += points;
+
+        // Notificar cambio de puntuación
+        OnScoreChanged?.Invoke(totalScore);
+
         pelletsEaten++;
 
-        Debug.Log($"¡Pellet {(isBigPellet ? "grande" : "normal")} comido! +{points} puntos");
+        Debug.Log($"¡Pellet {(isBigPellet ? "grande" : "normal")} comido! +{points} puntos. Puntuación total: {totalScore}");
         Debug.Log($"Pellets comidos: {pelletsEaten}/{totalPellets}");
+
+        // Verificar si se comieron todos los pellets
+        CheckAllPelletsEaten();
 
         // Activar power-up si es pellet grande
         if (isBigPellet)
         {
-            Debug.Log("¡Big Pellet comido! Activando power-up...");
             ActivatePower();
         }
-
-        // Verificar si se comieron todos los pellets
-        CheckAllPelletsEaten();
     }
+
 
     void CheckAllPelletsEaten()
     {
@@ -461,6 +493,8 @@ public class PelletGenerator : MonoBehaviour
         }
 
         totalScore += ghostEatenPoints;
+
+        // Notificar cambio de puntuación
         OnScoreChanged?.Invoke(totalScore);
 
         Debug.Log($"¡Fantasma comido! +{ghostEatenPoints} puntos. Puntuación total: {totalScore}");

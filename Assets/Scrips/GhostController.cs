@@ -1,4 +1,4 @@
-using UnityEngine;
+Ôªøusing UnityEngine;
 
 public class GhostController : MonoBehaviour
 {
@@ -13,17 +13,19 @@ public class GhostController : MonoBehaviour
     public Collider2D ghostCollider;
     public Animator ghostAnimator;
 
-    [Header("ConfiguraciÛn")]
-    public float vulnerableSpeedMultiplier = 0.5f;
-    public float respawnTime = 5f;
+    [Header("Configuraci√≥n de Animaciones")]
+    public float vulnerableFlashInterval = 0.2f;
 
     private GhostState currentState = GhostState.Normal;
     private float stateTimer = 0f;
     private MonoBehaviour[] ghostMovementScripts;
     private Vector3 initialPosition;
-    private float originalSpeed;
-    private GohstMove ghostMove;
-    private MirrorGhost mirrorGhost;
+    private float flashTimer = 0f;
+    private bool isFlashing = false;
+
+    // NUEVO: Para detecci√≥n manual
+    private float collisionCheckTimer = 0f;
+    private float collisionCheckInterval = 0.1f;
 
     public enum GhostState
     {
@@ -43,183 +45,311 @@ public class GhostController : MonoBehaviour
         if (ghostAnimator == null)
             ghostAnimator = GetComponent<Animator>();
 
-        // Obtener scripts de movimiento
-        ghostMove = GetComponent<GohstMove>();
-        mirrorGhost = GetComponent<MirrorGhost>();
-
-        // Guardar movimiento original
         ghostMovementScripts = GetComponents<MonoBehaviour>();
         initialPosition = transform.position;
         spawnPosition = initialPosition;
 
-        // Guardar velocidad original
-        if (ghostMove != null)
-            originalSpeed = ghostMove.moveSpeed;
-        else if (mirrorGhost != null)
-            originalSpeed = mirrorGhost.moveSpeed;
+        // NUEVO: Configuraci√≥n forzada de collider
+        if (ghostCollider != null)
+        {
+            ghostCollider.isTrigger = true; // FORZAR a trigger
+        }
 
         SetNormal();
     }
 
     void Update()
     {
-        // Controlar temporizadores de estado
         if (stateTimer > 0f)
         {
             stateTimer -= Time.deltaTime;
-
-            // Parpadeo cuando el power-up est· por terminar
-            if (currentState == GhostState.Vulnerable && stateTimer <= 3f)
-            {
-                if (spriteRenderer != null)
-                {
-                    spriteRenderer.enabled = Mathf.PingPong(Time.time * 5f, 1f) > 0.5f;
-                }
-            }
-
             if (stateTimer <= 0f)
             {
                 OnStateTimerEnd();
             }
         }
+
+        // Manejar animaci√≥n de vulnerable
+        if (currentState == GhostState.Vulnerable)
+        {
+            HandleVulnerableAnimation();
+
+            // NUEVO: Detecci√≥n manual de colisi√≥n
+            collisionCheckTimer -= Time.deltaTime;
+            if (collisionCheckTimer <= 0f)
+            {
+                ManualCollisionCheck();
+                collisionCheckTimer = collisionCheckInterval;
+            }
+        }
+    }
+
+    // NUEVO: Detecci√≥n manual de colisi√≥n con Pacman
+    void ManualCollisionCheck()
+    {
+        if (currentState != GhostState.Vulnerable) return;
+
+        // Buscar todos los objetos con tag Player
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        foreach (GameObject player in players)
+        {
+            if (player == null) continue;
+
+            // Calcular distancia
+            float distance = Vector2.Distance(transform.position, player.transform.position);
+
+            // Radio de detecci√≥n (ajustable)
+            float detectionRadius = 0.25f;
+
+            if (distance < detectionRadius)
+            {
+                Debug.Log($"üéØ COLISI√ìN MANUAL DETECTADA - Distancia: {distance}");
+                Debug.Log($"   - Fantasma: {gameObject.name}, Estado: {currentState}");
+                Debug.Log($"   - Pacman: {player.name}");
+
+                // Ejecutar la l√≥gica de colisi√≥n
+                ExecutePacmanCollision(player);
+                return; // Solo procesar una colisi√≥n por frame
+            }
+        }
+    }
+
+    // NUEVO: Ejecutar l√≥gica de colisi√≥n
+    void ExecutePacmanCollision(GameObject pacmanObject)
+    {
+        if (currentState == GhostState.Vulnerable)
+        {
+            Debug.Log($"‚úÖ FANTASMA COMIBLE - {gameObject.name} fue comido!");
+
+            // Notificar al PelletGenerator
+            PelletGenerator pelletGenerator = FindObjectOfType<PelletGenerator>();
+            if (pelletGenerator != null)
+            {
+                pelletGenerator.OnGhostEaten(this);
+            }
+
+            // Iniciar respawn
+            StartRespawn(deadSprite, 5f);
+        }
+        else if (currentState == GhostState.Normal)
+        {
+            Debug.Log($"‚ùå FANTASMA NORMAL - {gameObject.name} mata a Pacman");
+
+            // Matar a Pacman
+            SimplePacmanMove pacman = pacmanObject.GetComponent<SimplePacmanMove>();
+            if (pacman != null && !pacman.isDead)
+            {
+                pacman.Die();
+            }
+        }
+    }
+
+    void HandleVulnerableAnimation()
+    {
+        flashTimer -= Time.deltaTime;
+        if (flashTimer <= 0f)
+        {
+            isFlashing = !isFlashing;
+            flashTimer = vulnerableFlashInterval;
+
+            if (isFlashing)
+            {
+                SetSpriteManually(vulnerableSprite);
+            }
+            else
+            {
+                SetSpriteManually(normalSprite);
+            }
+
+            spriteRenderer.color = isFlashing ? Color.white : new Color(0.3f, 0.3f, 1f, 1f);
+        }
+
+        if (stateTimer < 3f)
+        {
+            vulnerableFlashInterval = 0.1f;
+        }
+    }
+
+    void SetSpriteManually(Sprite sprite)
+    {
+        if (spriteRenderer != null && sprite != null)
+        {
+            spriteRenderer.sprite = sprite;
+        }
     }
 
     public void SetVulnerable(Sprite vulnerableSprite, float duration)
     {
-        Debug.Log($"SetVulnerable llamado en {gameObject.name}");
-        Debug.Log($" - Estado actual: {currentState}");
-        Debug.Log($" - DuraciÛn: {duration}");
-
         if (currentState == GhostState.Dead || currentState == GhostState.Respawning)
-        {
-            Debug.Log($" - {gameObject.name} est· muerto o respawneando, ignorando");
             return;
-        }
+
+        Debug.Log($"üîµ SetVulnerable en {gameObject.name}");
 
         currentState = GhostState.Vulnerable;
         stateTimer = duration;
+        flashTimer = vulnerableFlashInterval;
+        isFlashing = true;
 
-        // Cambiar sprite y animaciÛn
-        if (spriteRenderer != null)
-        {
-            spriteRenderer.enabled = true;
-            if (vulnerableSprite != null)
-            {
-                spriteRenderer.sprite = vulnerableSprite;
-                Debug.Log($" - Sprite cambiado a vulnerable");
-            }
-            else
-            {
-                Debug.LogWarning($" - vulnerableSprite es nulo!");
-            }
-        }
-        else
-        {
-            Debug.LogWarning($" - spriteRenderer es nulo!");
-        }
-
-        // Actualizar animator
+        // Desactivar Animator para control manual
         if (ghostAnimator != null)
         {
-            ghostAnimator.SetBool("Vulnerable", true);
-            ghostAnimator.SetBool("Normal", false);
-            ghostAnimator.SetBool("Dead", false);
-            Debug.Log($" - Animator actualizado a vulnerable");
+            ghostAnimator.enabled = false;
         }
 
-        // Reducir velocidad - CORREGIDO: No desactivar los scripts
-        if (ghostMove != null)
+        // Forzar sprite vulnerable
+        SetSpriteManually(vulnerableSprite);
+        spriteRenderer.color = new Color(0.3f, 0.3f, 1f, 1f);
+
+        // Asegurar que el collider sea trigger
+        if (ghostCollider != null)
         {
-            ghostMove.moveSpeed = originalSpeed * vulnerableSpeedMultiplier;
-            ghostMove.enabled = true; // Asegurar que estÈ activo
-            Debug.Log($" - Velocidad reducida a {ghostMove.moveSpeed}");
+            ghostCollider.isTrigger = true;
         }
 
-        if (mirrorGhost != null)
+        // Desactivar movimiento
+        if (ghostMovementScripts != null)
         {
-            mirrorGhost.moveSpeed = originalSpeed * vulnerableSpeedMultiplier;
-            mirrorGhost.enabled = true; // Asegurar que estÈ activo
-            Debug.Log($" - Velocidad reducida a {mirrorGhost.moveSpeed}");
+            foreach (var script in ghostMovementScripts)
+            {
+                if (script != null && script != this && script.enabled)
+                {
+                    if (script.GetType().Name.Contains("Movement"))
+                    {
+                        script.enabled = false;
+                    }
+                }
+            }
         }
-
-        Debug.Log($"{gameObject.name} ahora es vulnerable por {duration} segundos");
     }
 
+    // MANTENER el OnTriggerEnter2D original tambi√©n
 
-    public void SetNormal()
+
+
+public void SetNormal()
     {
+        if (currentState == GhostState.Dead || currentState == GhostState.Respawning)
+            return;
+
+        Debug.Log($"SetNormal llamado en {gameObject.name}");
+
         currentState = GhostState.Normal;
         stateTimer = 0f;
 
-        // Restaurar sprite normal
-        if (spriteRenderer != null)
+        // NUEVO: Reactivar Animator
+        if (ghostAnimator != null)
         {
-            spriteRenderer.enabled = true;
-            if (normalSprite != null)
+            ghostAnimator.enabled = true;
+        }
+
+        // Restaurar sprite normal
+        SetSpriteManually(normalSprite);
+        spriteRenderer.color = Color.white;
+
+        // NUEVO: Restaurar layer original
+        gameObject.layer = LayerMask.NameToLayer("Ghost");
+
+        // Reactivar scripts de movimiento
+        if (ghostMovementScripts != null)
+        {
+            foreach (var script in ghostMovementScripts)
             {
-                spriteRenderer.sprite = normalSprite;
+                if (script != null && script != this)
+                {
+                    script.enabled = true;
+                }
             }
         }
 
-        // Actualizar animator
-        if (ghostAnimator != null)
-        {
-            ghostAnimator.SetBool("Vulnerable", false);
-            ghostAnimator.SetBool("Normal", true);
-            ghostAnimator.SetBool("Dead", false);
-        }
-
-        // Restaurar velocidad normal
-        if (ghostMove != null)
-            ghostMove.moveSpeed = originalSpeed;
-        if (mirrorGhost != null)
-            mirrorGhost.moveSpeed = originalSpeed;
-
-        // Restaurar comportamiento normal
-        SetFleeBehavior(false);
-
-        Debug.Log(gameObject.name + " vuelve a la normalidad");
+        Debug.Log($"{gameObject.name} vuelve a NORMAL. Layer: {LayerMask.LayerToName(gameObject.layer)}");
     }
 
     public void StartRespawn(Sprite deadGhostSprite, float respawnTime)
     {
+        Debug.Log($"StartRespawn llamado en {gameObject.name}");
+
         currentState = GhostState.Dead;
         stateTimer = 0f;
 
-        // Cambiar a sprite de fantasma muerto
-        if (spriteRenderer != null && deadGhostSprite != null)
-        {
-            spriteRenderer.sprite = deadGhostSprite;
-        }
-
-        // Actualizar animator
+        // NUEVO: Desactivar Animator para control manual
         if (ghostAnimator != null)
         {
-            ghostAnimator.SetBool("Vulnerable", false);
-            ghostAnimator.SetBool("Normal", false);
-            ghostAnimator.SetBool("Dead", true);
+            ghostAnimator.enabled = false;
         }
 
-        // Desactivar colisiÛn temporalmente
+        // Cambiar a sprite de fantasma muerto
+        SetSpriteManually(deadSprite != null ? deadSprite : deadGhostSprite);
+        spriteRenderer.color = Color.white;
+
+        // NUEVO: Cambiar layer para evitar colisiones
+        gameObject.layer = LayerMask.NameToLayer("Default");
+
+        // Desactivar colisi√≥n
         if (ghostCollider != null)
         {
             ghostCollider.enabled = false;
         }
 
-        // Detener movimiento
-        if (ghostMove != null)
-            ghostMove.moveSpeed = 0f;
-        if (mirrorGhost != null)
-            mirrorGhost.moveSpeed = 0f;
+        // Desactivar movimiento
+        if (ghostMovementScripts != null)
+        {
+            foreach (var script in ghostMovementScripts)
+            {
+                if (script != null && script != this && script.enabled)
+                {
+                    script.enabled = false;
+                }
+            }
+        }
 
-        // Mover al punto de origen
+        // Mover al spawn
         transform.position = spawnPosition;
 
-        // Iniciar cuenta regresiva para respawn
+        // Iniciar respawn
         currentState = GhostState.Respawning;
         stateTimer = respawnTime;
 
-        Debug.Log(gameObject.name + " muriÛ. Respawn en " + respawnTime + " segundos");
+        Debug.Log($"{gameObject.name} en RESPAWN. Posici√≥n: {spawnPosition}");
+    }
+
+    void CompleteRespawn()
+    {
+        Debug.Log($"CompleteRespawn llamado en {gameObject.name}");
+
+        currentState = GhostState.Normal;
+
+        // NUEVO: Reactivar Animator
+        if (ghostAnimator != null)
+        {
+            ghostAnimator.enabled = true;
+        }
+
+        // Restaurar sprite normal
+        SetSpriteManually(normalSprite);
+        spriteRenderer.color = Color.white;
+
+        // NUEVO: Restaurar layer original
+        gameObject.layer = LayerMask.NameToLayer("Ghost");
+
+        // Reactivar colisi√≥n
+        if (ghostCollider != null)
+        {
+            ghostCollider.enabled = true;
+        }
+
+        // Reactivar movimiento
+        if (ghostMovementScripts != null)
+        {
+            foreach (var script in ghostMovementScripts)
+            {
+                if (script != null && script != this)
+                {
+                    script.enabled = true;
+                }
+            }
+        }
+
+        Debug.Log($"{gameObject.name} ha revivido completamente");
     }
 
     void OnStateTimerEnd()
@@ -235,91 +365,91 @@ public class GhostController : MonoBehaviour
         }
     }
 
-    void CompleteRespawn()
+    public void ResetToSpawn()
     {
+        Debug.Log($"üîÑ Resetando {gameObject.name} a spawn position");
+
+        // Detener cualquier temporizador
+        stateTimer = 0f;
+
+        // Forzar estado normal
         currentState = GhostState.Normal;
+
+        // Reactivar Animator si estaba desactivado
+        if (ghostAnimator != null)
+        {
+            ghostAnimator.enabled = true;
+        }
 
         // Restaurar sprite normal
         if (spriteRenderer != null && normalSprite != null)
         {
             spriteRenderer.sprite = normalSprite;
+            spriteRenderer.color = Color.white;
         }
 
-        // Actualizar animator
-        if (ghostAnimator != null)
-        {
-            ghostAnimator.SetBool("Vulnerable", false);
-            ghostAnimator.SetBool("Normal", true);
-            ghostAnimator.SetBool("Dead", false);
-        }
-
-        // Reactivar colisiÛn
+        // Reactivar colisi√≥n
         if (ghostCollider != null)
         {
             ghostCollider.enabled = true;
         }
 
-        // Restaurar velocidad y comportamiento
-        if (ghostMove != null)
-            ghostMove.moveSpeed = originalSpeed;
-        if (mirrorGhost != null)
-            mirrorGhost.moveSpeed = originalSpeed;
+        // Mover a posici√≥n de spawn
+        transform.position = spawnPosition;
 
-        SetFleeBehavior(false);
+        // Reactivar todos los scripts de movimiento
+        if (ghostMovementScripts != null)
+        {
+            foreach (var script in ghostMovementScripts)
+            {
+                if (script != null && script != this)
+                {
+                    script.enabled = true;
+                }
+            }
+        }
 
-        Debug.Log(gameObject.name + " ha revivido");
-    }
+        // Restaurar layer original si es necesario
+        gameObject.layer = LayerMask.NameToLayer("Ghost");
 
-    void SetFleeBehavior(bool shouldFlee)
-    {
-        // En lugar de desactivar scripts, podrÌas cambiar su comportamiento
-        // Por ahora, solo cambiamos la velocidad y el estado
-        // Los scripts permanecen activos pero con diferente configuraciÛn
-
-        Debug.Log($"SetFleeBehavior: {shouldFlee}");
-
-        // AquÌ puedes agregar lÛgica especÌfica de huida si la necesitas
-        // Por ejemplo, cambiar el target de movimiento, etc.
+        Debug.Log($"‚úÖ {gameObject.name} resetado completamente");
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        Debug.Log($"OnTriggerEnter2D en {gameObject.name}. Estado: {currentState}. Con: {other.gameObject.name}");
+
         if (other.CompareTag("Player"))
         {
-            Debug.Log($"Fantasma {gameObject.name} colisionÛ con jugador");
-            Debug.Log($" - Estado del fantasma: {currentState}");
-
-            SimplePacmanMove pacman = other.GetComponent<SimplePacmanMove>();
-            if (pacman == null || pacman.isDead)
-            {
-                Debug.Log($" - Pacman nulo o muerto, ignorando");
-                return;
-            }
-
             if (currentState == GhostState.Vulnerable)
             {
-                Debug.Log($" - Fantasma vulnerable, ser· comido");
+                Debug.Log($"Fantasma vulnerable {gameObject.name} fue comido por Pacman");
 
                 // Fantasma comido
                 PelletGenerator pelletGenerator = FindObjectOfType<PelletGenerator>();
                 if (pelletGenerator != null)
                 {
                     pelletGenerator.OnGhostEaten(this);
-                    Debug.Log($" - Notificado a PelletGenerator");
                 }
-                else
-                {
-                    Debug.LogError($" - No se encontrÛ PelletGenerator!");
-                }
+
+                StartRespawn(deadSprite, 5f); // Usar 5 segundos como respawn time
             }
             else if (currentState == GhostState.Normal)
             {
-                Debug.Log($" - Fantasma normal, mata al jugador");
+                Debug.Log($"Fantasma normal {gameObject.name} mata a Pacman");
+
                 // Matar al jugador
-                pacman.Die();
+                SimplePacmanMove pacman = other.GetComponent<SimplePacmanMove>();
+                if (pacman != null && !pacman.isDead)
+                {
+                    pacman.Die();
+                }
             }
         }
     }
+
+    // NUEVO: Para debugging en el Editor
+ 
 
     public bool IsVulnerable()
     {
@@ -334,10 +464,5 @@ public class GhostController : MonoBehaviour
     public GhostState GetCurrentState()
     {
         return currentState;
-    }
-
-    public float GetStateTimeLeft()
-    {
-        return stateTimer;
     }
 }
