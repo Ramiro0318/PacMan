@@ -1,7 +1,4 @@
-using Unity.VisualScripting;
-using UnityEditor.Rendering;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 
 public class ManejarMusica: MonoBehaviour
