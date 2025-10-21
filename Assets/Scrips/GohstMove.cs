@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class ImprovedGhostMove : MonoBehaviour
 {
     [Header("Configuración")]
-    public float moveSpeed = 2f;
+    public float moveSpeed = .9f;
     public LayerMask wallLayer;
     public float directionChangeTime = 3f;
     public float raycastDistance = 0.5f;
@@ -35,6 +35,18 @@ public class ImprovedGhostMove : MonoBehaviour
 
     void Update()
     {
+        // VERIFICACIÓN DE ESTADO - NO MOVER SI ESTÁ EN RESPAWN
+        GhostController ghostController = GetComponent<GhostController>();
+        if (ghostController != null)
+        {
+            GhostController.GhostState state = ghostController.GetCurrentState();
+            if (state == GhostController.GhostState.Respawning || state == GhostController.GhostState.Dead)
+            {
+                // Detener movimiento durante respawn
+                if (rb != null) rb.linearVelocity = Vector2.zero;
+                return;
+            }
+        }
         timer -= Time.deltaTime;
 
         // Cambiar dirección periódicamente

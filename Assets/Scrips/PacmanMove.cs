@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Linq;
 using System.Text.RegularExpressions;
+using UnityEngine.SceneManagement;
 
 public class SimplePacmanMove : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class SimplePacmanMove : MonoBehaviour
     public LayerMask wallLayer = LayerMask.GetMask("Wall");
 
 
-    public GameObject gameOverPanel;
+    public string gameOverSceneName = "GameOver";
     public bool isDead = false;
     public float respawnTime = 3f;
 
@@ -33,7 +34,7 @@ public class SimplePacmanMove : MonoBehaviour
         _animator = GetComponent<Animator>();
         initialPosition = transform.position;
         currentLives = maxLives; // Inicializar con todas las vidas
-
+        Time.timeScale = 1f;
         // Notificar el estado inicial de vidas
         OnLivesChanged?.Invoke(currentLives);
     }
@@ -136,7 +137,7 @@ public class SimplePacmanMove : MonoBehaviour
         movementInput = Vector2.zero;
         lastDirection = Vector2.zero;
 
-        Debug.Log($"Pacman ha muerto! Vidas restantes: {currentLives}");
+        
 
         // Verificar si quedan vidas
         if (currentLives <= 0)
@@ -158,6 +159,9 @@ public class SimplePacmanMove : MonoBehaviour
         isRespawning = true;
         transform.position = initialPosition;
 
+        // Asegurarse de que el tiempo esté corriendo
+        Time.timeScale = 1f;
+
         // Resetear dirección
         lastDirection = Vector2.right;
         movementInput = Vector2.zero;
@@ -178,27 +182,34 @@ public class SimplePacmanMove : MonoBehaviour
     // Agregar este método a la clase SimplePacmanMove
     public void GameOver()
     {
-        Debug.Log("GameOver() llamado en SimplePacmanMove");
-
-        if (gameOverPanel != null)
-        {
-            gameOverPanel.SetActive(true);
-            Debug.Log("Panel de Game Over activado");
-        }
-        else
-        {
-            Debug.LogWarning("gameOverPanel no asignado en el inspector");
-        }
+        Debug.Log("GameOver() llamado - Cambiando a escena de Game Over");
 
         isDead = true;
         movementInput = Vector2.zero;
         lastDirection = Vector2.zero;
 
-        // Detener el tiempo del juego
-        Time.timeScale = 0f;
+        // NO detener el tiempo del juego - esto puede interferir con la transición de escenas
+        // Time.timeScale = 0f; // ELIMINAR esta línea
 
-        Debug.Log("Game Over completado");
+        // Cambiar a la escena de Game Over después de un pequeño delay
+        Invoke("LoadGameOverScene", 1.5f); // Delay para ver la animación de muerte
+
+        Debug.Log("Iniciando transición a Game Over Scene");
     }
+
+    void LoadGameOverScene()
+    {
+        if (!string.IsNullOrEmpty(gameOverSceneName))
+        {
+            Debug.Log($"Cargando escena: {gameOverSceneName}");
+            SceneManager.LoadScene(gameOverSceneName);
+        }
+        else
+        {
+            Debug.LogError("Nombre de escena de Game Over no asignado!");
+        }
+    }
+
 
     // Método público para obtener las vidas actuales (útil para UI)
     public int GetCurrentLives()
@@ -221,5 +232,7 @@ public class SimplePacmanMove : MonoBehaviour
         GUI.Label(new Rect(10, 70, 300, 20), $"Estado: {(isDead ? "MUERTO" : "VIVO")}");
         GUI.Label(new Rect(10, 90, 300, 20), $"Vidas: {currentLives}/{maxLives}");
         GUI.Label(new Rect(10, 110, 300, 20), $"Respawning: {isRespawning}");
+        GUI.Label(new Rect(10, 130, 300, 20), $"Game Over Scene: {gameOverSceneName}");
+
     }
 }

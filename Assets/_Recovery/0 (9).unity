@@ -16046,6 +16046,7 @@ GameObject:
   - component: {fileID: 714225077}
   - component: {fileID: 714225083}
   - component: {fileID: 714225082}
+  - component: {fileID: 714225081}
   - component: {fileID: 714225080}
   m_Layer: 10
   m_Name: Clyde
@@ -16143,7 +16144,7 @@ Transform:
   m_GameObject: {fileID: 714225076}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.111, y: -0.047, z: 0}
+  m_LocalPosition: {x: -0.269, y: 0.393, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -16169,6 +16170,25 @@ MonoBehaviour:
   ghostCollider: {fileID: 0}
   ghostAnimator: {fileID: 0}
   vulnerableFlashInterval: 0.2
+--- !u!114 &714225081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 714225076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48c698b3c8d1cc14091c6d96f032e49b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ImprovedGhostMove
+  moveSpeed: 0.8
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  directionChangeTime: 3
+  raycastDistance: 0.5
+  showDebugRays: 0
 --- !u!50 &714225082
 Rigidbody2D:
   serializedVersion: 5
@@ -16870,8 +16890,6 @@ GameObject:
   - component: {fileID: 989639798}
   - component: {fileID: 989639797}
   - component: {fileID: 989639795}
-  - component: {fileID: 989639802}
-  - component: {fileID: 989639801}
   m_Layer: 10
   m_Name: Pinky
   m_TagString: Untagged
@@ -17031,51 +17049,12 @@ Transform:
   m_GameObject: {fileID: 989639794}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.091, y: 0.409, z: 0}
+  m_LocalPosition: {x: 0.302, y: -0.07, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &989639801
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 989639794}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59c32810521eede4c805d19e609d31ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GhostController
-  normalSprite: {fileID: 0}
-  vulnerableSprite: {fileID: 6298199098208185878, guid: d2f0d0000bf911648a7c151e84942c39, type: 3}
-  deadSprite: {fileID: -860437258653548287, guid: d2f0d0000bf911648a7c151e84942c39, type: 3}
-  spawnPosition: {x: 0, y: 0, z: 0}
-  spriteRenderer: {fileID: 0}
-  ghostCollider: {fileID: 0}
-  ghostAnimator: {fileID: 0}
-  vulnerableFlashInterval: 0.2
---- !u!114 &989639802
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 989639794}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48c698b3c8d1cc14091c6d96f032e49b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ImprovedGhostMove
-  moveSpeed: 2
-  wallLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  directionChangeTime: 3
-  raycastDistance: 0.5
-  showDebugRays: 1
 --- !u!1 &1138890651
 GameObject:
   m_ObjectHideFlags: 0
@@ -17847,7 +17826,7 @@ MonoBehaviour:
   wallLayer:
     serializedVersion: 2
     m_Bits: 512
-  gameOverSceneName: GameOver
+  gameOverPanel: {fileID: 924765468}
   isDead: 0
   respawnTime: 1.5
   maxLives: 3
