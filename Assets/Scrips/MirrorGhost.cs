@@ -6,7 +6,7 @@ public class MirrorGhost : MonoBehaviour
     [Header("Configuración del Espejo")]
     public float moveSpeed = 1f;
     public float collisionCheckDistance = 0.09f;
-    public LayerMask wallLayer = LayerMask.GetMask("Wall");
+    public LayerMask wallLayer = LayerMask.GetMask();
 
     [Header("Comportamiento Espejo")]
     public bool mirrorX = true;

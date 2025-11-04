@@ -277,7 +277,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 754533349}
+      - m_Target: {fileID: 754533351}
         m_TargetAssemblyTypeName: ControlPausa, Assembly-CSharp
         m_MethodName: DesactivarPausa
         m_Mode: 1
@@ -16316,7 +16316,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 754533350}
-  - component: {fileID: 754533349}
+  - component: {fileID: 754533351}
   m_Layer: 0
   m_Name: PauseManager
   m_TagString: Untagged
@@ -16324,18 +16324,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &754533349
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 754533348}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0588b64f9e15c9c4c827bff6ff59c2ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ControlPausa
 --- !u!4 &754533350
 Transform:
   m_ObjectHideFlags: 0
@@ -16351,6 +16339,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 786134521}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &754533351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 754533348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51ae310e7b84bfc4bbf6bb6aa3ef81c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ControlPausa
+  CanvasPausa: {fileID: 924765468}
+  btnDefault: {fileID: 173120533}
 --- !u!1 &786134520
 GameObject:
   m_ObjectHideFlags: 0
@@ -17069,10 +17071,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48c698b3c8d1cc14091c6d96f032e49b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ImprovedGhostMove
-  moveSpeed: 2
+  moveSpeed: 0.9
   wallLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
   directionChangeTime: 3
   raycastDistance: 0.5
   showDebugRays: 1
@@ -28742,6 +28744,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0588b64f9e15c9c4c827bff6ff59c2ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ControlPausa
+  CanvasPausa: {fileID: 0}
+  btnDefault: {fileID: 0}
 --- !u!114 &2101110467
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28885,7 +28889,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cd9d1050a56dbd4b9d17964a79fff11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MirrorGhost
-  moveSpeed: 1
+  moveSpeed: 0.9
   collisionCheckDistance: 0.09
   wallLayer:
     serializedVersion: 2
