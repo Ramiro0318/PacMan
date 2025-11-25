@@ -226,7 +226,7 @@ public class GhostController : MonoBehaviour
 
 
 
-public void SetNormal()
+    public void SetNormal()
     {
         if (currentState == GhostState.Dead || currentState == GhostState.Respawning)
             return;
@@ -449,7 +449,7 @@ public void SetNormal()
     }
 
     // NUEVO: Para debugging en el Editor
- 
+
 
     public bool IsVulnerable()
     {
