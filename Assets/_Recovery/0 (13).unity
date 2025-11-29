@@ -911,7 +911,7 @@ MonoBehaviour:
   mirrorY: 1
   mirrorDelay: 0.3
   minTimeBetweenTeleports: 3
-  maxTimeBetweenTeleports: 5
+  maxTimeBetweenTeleports: 8
   teleportEffect: {fileID: 0}
 --- !u!1 &452396728
 GameObject:

@@ -16872,8 +16872,8 @@ GameObject:
   - component: {fileID: 989639798}
   - component: {fileID: 989639797}
   - component: {fileID: 989639795}
-  - component: {fileID: 989639802}
   - component: {fileID: 989639801}
+  - component: {fileID: 989639802}
   m_Layer: 10
   m_Name: Pinky
   m_TagString: Untagged
@@ -17068,16 +17068,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 989639794}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48c698b3c8d1cc14091c6d96f032e49b, type: 3}
+  m_Script: {fileID: 11500000, guid: 1efa1205b11c09b4091c82972b137d8e, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ImprovedGhostMove
-  moveSpeed: 0.9
+  m_EditorClassIdentifier: Assembly-CSharp::TeleportGhost
+  minTimeBetweenTeleports: 3
+  maxTimeBetweenTeleports: 5
+  moveSpeed: 1
   wallLayer:
     serializedVersion: 2
     m_Bits: 512
-  directionChangeTime: 3
-  raycastDistance: 0.5
-  showDebugRays: 1
+  teleportEffect: {fileID: 0}
 --- !u!1 &1138890651
 GameObject:
   m_ObjectHideFlags: 0
@@ -27567,7 +27567,7 @@ MonoBehaviour:
   pelletTilemap: {fileID: 1642528965}
   pelletSprite: {fileID: -4516436471707867707, guid: a3fa84a69fdb5944d8ae645846fe1130, type: 3}
   bigPelletSprite: {fileID: 611682086, guid: a3fa84a69fdb5944d8ae645846fe1130, type: 3}
-  maxBigPellets: 4
+  maxBigPellets: 3
   bigPelletPoints: 50
   pelletSound: {fileID: 8300000, guid: 972373e62dece6844a1f1fe7d353db7f, type: 3}
   bigPelletSound: {fileID: 8300000, guid: 972373e62dece6844a1f1fe7d353db7f, type: 3}
@@ -28744,8 +28744,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0588b64f9e15c9c4c827bff6ff59c2ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ControlPausa
-  CanvasPausa: {fileID: 0}
-  btnDefault: {fileID: 0}
 --- !u!114 &2101110467
 MonoBehaviour:
   m_ObjectHideFlags: 0

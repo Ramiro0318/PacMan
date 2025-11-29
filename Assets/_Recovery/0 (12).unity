@@ -909,10 +909,12 @@ MonoBehaviour:
     m_Bits: 512
   mirrorX: 1
   mirrorY: 1
-  mirrorDelay: 0.3
-  minTimeBetweenTeleports: 3
-  maxTimeBetweenTeleports: 5
+  initialTeleportDelay: 0.1
+  teleportInterval: 2
   teleportEffect: {fileID: 0}
+  normalSprite: {fileID: 0}
+  invisibleSprite: {fileID: -2975521157999401294, guid: a3fa84a69fdb5944d8ae645846fe1130, type: 3}
+  invisibleDuration: 3
 --- !u!1 &452396728
 GameObject:
   m_ObjectHideFlags: 0
@@ -1868,6 +1870,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0588b64f9e15c9c4c827bff6ff59c2ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ControlPausa
+  CanvasPausa: {fileID: 0}
+  btnDefault: {fileID: 0}
 --- !u!114 &803409276
 MonoBehaviour:
   m_ObjectHideFlags: 0

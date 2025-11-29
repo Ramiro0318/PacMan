@@ -348,6 +348,7 @@ public class PelletGenerator : MonoBehaviour
         // Hacer todos los fantasmas vulnerables
         foreach (GhostController ghost in allGhosts)
         {
+          
             if (ghost != null && ghost.IsAlive())
             {
                 ghost.SetVulnerable(vulnerableGhostSprite, ghostVulnerableTime);
