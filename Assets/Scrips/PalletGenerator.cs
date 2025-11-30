@@ -33,6 +33,9 @@ public class PelletGenerator : MonoBehaviour
     [Header("Game Over")]
     public string gameOverSceneName = "GameOverScene";
 
+    [Header("Escena de Victoria")] // NUEVO: Configuración para la escena de victoria
+    public string victorySceneName = "Inicio";
+
     private AudioSource audioSource;
     private List<Vector3Int> availablePositions = new List<Vector3Int>();
     private List<GameObject> bigPellets = new List<GameObject>();
@@ -311,11 +314,82 @@ public class PelletGenerator : MonoBehaviour
         Pellet[] remainingPellets = FindObjectsOfType<Pellet>();
         int actualPelletsCount = remainingPellets.Length;
 
+        Debug.Log($"Pellets restantes: {actualPelletsCount}, Pellets comidos: {pelletsEaten}, Total inicial: {totalPellets}");
+
         if (actualPelletsCount == 0 || pelletsEaten >= totalPellets)
         {
-            Debug.Log("¡NIVEL COMPLETADO!");
-            GameOver();
+            Debug.Log("¡NIVEL COMPLETADO! Todos los pellets han sido comidos.");
+            LevelCompleted();
         }
+    }
+
+    // NUEVO MÉTODO: Para cuando se completa el nivel
+    void LevelCompleted()
+    {
+        Debug.Log("=== NIVEL COMPLETADO - CARGANDO SELECTOR DE NIVEL ===");
+
+        // Detener el tiempo del juego
+        Time.timeScale = 0f;
+
+
+        Debug.Log("¡FELICIDADES! Has completado el nivel.");
+        Debug.Log($"Puntuación final: {totalScore}");
+        Debug.Log($"Pellets comidos: {pelletsEaten}/{totalPellets}");
+
+
+        //Invoke("LoadLevelSelector", 2f);
+        LoadLevelSelector();
+    }
+
+    // NUEVO MÉTODO: Cargar el selector de nivel
+    void LoadLevelSelector()
+    {
+        Debug.Log($"Cargando escena: {victorySceneName}");
+
+        if (!string.IsNullOrEmpty(victorySceneName))
+        {
+            if (SceneExists(victorySceneName))
+            {
+
+                Time.timeScale = 1f;
+                SceneManager.LoadScene(victorySceneName);
+            }
+            else
+            {
+                Debug.LogError($"La escena '{victorySceneName}' no existe en Build Settings!");
+                Debug.Log("Escenas disponibles en Build Settings:");
+                for (int i = 0; i < SceneManager.sceneCountInBuildSettings; i++)
+                {
+                    string scenePath = SceneUtility.GetScenePathByBuildIndex(i);
+                    string sceneNameInBuild = System.IO.Path.GetFileNameWithoutExtension(scenePath);
+                    Debug.Log($"- {sceneNameInBuild}");
+                }
+
+
+                Time.timeScale = 1f;
+            }
+        }
+        else
+        {
+            Debug.LogError("Nombre de escena de victoria está vacío!");
+            Time.timeScale = 1f;
+        }
+    }
+
+
+    bool SceneExists(string sceneName)
+    {
+        if (string.IsNullOrEmpty(sceneName)) return false;
+
+        for (int i = 0; i < SceneManager.sceneCountInBuildSettings; i++)
+        {
+            string scenePath = SceneUtility.GetScenePathByBuildIndex(i);
+            string sceneNameInBuild = System.IO.Path.GetFileNameWithoutExtension(scenePath);
+
+            if (sceneNameInBuild == sceneName)
+                return true;
+        }
+        return false;
     }
 
     void GameOver()
@@ -345,10 +419,10 @@ public class PelletGenerator : MonoBehaviour
 
         Debug.Log("Nuevo power-up activado");
 
-        // Hacer todos los fantasmas vulnerables
+
         foreach (GhostController ghost in allGhosts)
         {
-          
+
             if (ghost != null && ghost.IsAlive())
             {
                 ghost.SetVulnerable(vulnerableGhostSprite, ghostVulnerableTime);
@@ -393,7 +467,6 @@ public class PelletGenerator : MonoBehaviour
         ghost.StartRespawn(deadGhostSprite, ghostRespawnTime);
     }
 
-    // CORRECCIÓN: Método para verificar si un fantasma puede moverse
     public bool CanGhostMove(GhostController ghost)
     {
         if (ghost == null) return false;
