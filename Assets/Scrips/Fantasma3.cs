@@ -268,10 +268,10 @@ public class TeleportGhost : MonoBehaviour
     void OnGUI()
     {
         int yOffset = 600;
-        GUI.Label(new Rect(10, yOffset, 500, 20), $"TELEPORT GHOST - Estado: {(isTeleporting ? "🔮 TELETRANSPORTÁNDOSE" : "👻 QUIETO")}");
-        GUI.Label(new Rect(10, yOffset + 20, 500, 20), $"Pellets: {pelletPositions.Count} - Siguiente TP: {teleportTimer:F1}s");
-        GUI.Label(new Rect(10, yOffset + 40, 500, 20), $"Movimiento: {currentDirection}");
-        GUI.Label(new Rect(10, yOffset + 60, 500, 20), $"Posición actual: {transform.position}");
+        //GUI.Label(new Rect(10, yOffset, 500, 20), $"TELEPORT GHOST - Estado: {(isTeleporting ? "🔮 TELETRANSPORTÁNDOSE" : "👻 QUIETO")}");
+        //GUI.Label(new Rect(10, yOffset + 20, 500, 20), $"Pellets: {pelletPositions.Count} - Siguiente TP: {teleportTimer:F1}s");
+        //GUI.Label(new Rect(10, yOffset + 40, 500, 20), $"Movimiento: {currentDirection}");
+        //GUI.Label(new Rect(10, yOffset + 60, 500, 20), $"Posición actual: {transform.position}");
     }
 
     void OnDrawGizmos()

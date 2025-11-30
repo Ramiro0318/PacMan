@@ -149,12 +149,12 @@ public class ReliableMovingWall : MonoBehaviour
         if (player != null)
         {
             float distance = Vector3.Distance(transform.position, player.transform.position);
-            GUI.Label(new Rect(10, 400, 400, 20), $"Distancia a jugador: {distance:F2}");
-            GUI.Label(new Rect(10, 420, 400, 20), $"Jugador muerto: {player.isDead}");
+            //GUI.Label(new Rect(10, 400, 400, 20), $"Distancia a jugador: {distance:F2}");
+            //GUI.Label(new Rect(10, 420, 400, 20), $"Jugador muerto: {player.isDead}");
         }
         else
         {
-            GUI.Label(new Rect(10, 400, 400, 20), "Jugador no encontrado");
+            //GUI.Label(new Rect(10, 400, 400, 20), "Jugador no encontrado");
         }
     }
 }

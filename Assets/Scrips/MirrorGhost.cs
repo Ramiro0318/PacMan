@@ -224,7 +224,7 @@ public class MirrorGhost : MonoBehaviour
 
     void OnGUI()
     {
-        GUI.Label(new Rect(10, 90, 300, 20), $"Fantasma - Movimiento: {movementInput}");
-        GUI.Label(new Rect(10, 110, 300, 20), $"Fantasma - Última Dir: {lastDirection}");
+        //GUI.Label(new Rect(10, 90, 300, 20), $"Fantasma - Movimiento: {movementInput}");
+        //GUI.Label(new Rect(10, 110, 300, 20), $"Fantasma - Última Dir: {lastDirection}");
     }
 }

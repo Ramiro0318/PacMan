@@ -433,11 +433,11 @@ public class MirrorTeleportGhost : MonoBehaviour
     void OnGUI()
     {
         int yOffset = 90;
-        GUI.Label(new Rect(10, yOffset, 400, 20), $"Fantasma Espejo-TP - Movimiento: {movementInput}");
-        GUI.Label(new Rect(10, yOffset + 20, 400, 20), $"Última Dir: {lastDirection}");
-        GUI.Label(new Rect(10, yOffset + 40, 400, 20), $"Estado: {(isTeleporting ? "🔮 TELETRANSPORTÁNDOSE" : "👻 ACTIVO")}");
-        GUI.Label(new Rect(10, yOffset + 60, 400, 20), $"Pellets: {pelletPositions.Count} - Siguiente TP: {teleportTimer:F1}s");
-        GUI.Label(new Rect(10, yOffset + 80, 400, 20), $"Posición actual: {transform.position}");
+        //GUI.Label(new Rect(10, yOffset, 400, 20), $"Fantasma Espejo-TP - Movimiento: {movementInput}");
+        //GUI.Label(new Rect(10, yOffset + 20, 400, 20), $"Última Dir: {lastDirection}");
+        //GUI.Label(new Rect(10, yOffset + 40, 400, 20), $"Estado: {(isTeleporting ? "🔮 TELETRANSPORTÁNDOSE" : "👻 ACTIVO")}");
+        //GUI.Label(new Rect(10, yOffset + 60, 400, 20), $"Pellets: {pelletPositions.Count} - Siguiente TP: {teleportTimer:F1}s");
+        //GUI.Label(new Rect(10, yOffset + 80, 400, 20), $"Posición actual: {transform.position}");
     }
 
     void OnDrawGizmos()

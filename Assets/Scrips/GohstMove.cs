@@ -153,10 +153,10 @@ public class ImprovedGhostMove : MonoBehaviour
     void OnGUI()
     {
         // Mostrar información de debug en pantalla
-        GUI.Label(new Rect(10, 130, 400, 20), $"Ghost Direction: {currentDirection}");
-        GUI.Label(new Rect(10, 150, 400, 20), $"Timer: {timer:F2}");
-        GUI.Label(new Rect(10, 170, 400, 20), $"Wall Layer: {wallLayer.value}");
-        GUI.Label(new Rect(10, 190, 400, 20), $"Position: {transform.position}");
+        //GUI.Label(new Rect(10, 130, 400, 20), $"Ghost Direction: {currentDirection}");
+        //GUI.Label(new Rect(10, 150, 400, 20), $"Timer: {timer:F2}");
+        //GUI.Label(new Rect(10, 170, 400, 20), $"Wall Layer: {wallLayer.value}");
+        //GUI.Label(new Rect(10, 190, 400, 20), $"Position: {transform.position}");
     }
 
     void OnDrawGizmos()

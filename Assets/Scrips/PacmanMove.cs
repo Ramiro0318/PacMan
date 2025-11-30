@@ -226,13 +226,13 @@ public class SimplePacmanMove : MonoBehaviour
     public System.Action<int> OnLivesChanged; // Evento para cambios de vida
     void OnGUI()
     {
-        GUI.Label(new Rect(10, 10, 300, 20), $"Movimiento: {movementInput}");
-        GUI.Label(new Rect(10, 30, 300, 20), $"Última Dirección: {lastDirection}");
-        GUI.Label(new Rect(10, 50, 300, 20), $"Input este frame: {hasInputThisFrame}");
-        GUI.Label(new Rect(10, 70, 300, 20), $"Estado: {(isDead ? "MUERTO" : "VIVO")}");
-        GUI.Label(new Rect(10, 90, 300, 20), $"Vidas: {currentLives}/{maxLives}");
-        GUI.Label(new Rect(10, 110, 300, 20), $"Respawning: {isRespawning}");
-        GUI.Label(new Rect(10, 130, 300, 20), $"Game Over Scene: {gameOverSceneName}");
+        //GUI.Label(new Rect(10, 10, 300, 20), $"Movimiento: {movementInput}");
+        //GUI.Label(new Rect(10, 30, 300, 20), $"Última Dirección: {lastDirection}");
+        //GUI.Label(new Rect(10, 50, 300, 20), $"Input este frame: {hasInputThisFrame}");
+        //GUI.Label(new Rect(10, 70, 300, 20), $"Estado: {(isDead ? "MUERTO" : "VIVO")}");
+        //GUI.Label(new Rect(10, 90, 300, 20), $"Vidas: {currentLives}/{maxLives}");
+        //GUI.Label(new Rect(10, 110, 300, 20), $"Respawning: {isRespawning}");
+        //GUI.Label(new Rect(10, 130, 300, 20), $"Game Over Scene: {gameOverSceneName}");
 
     }
 }
